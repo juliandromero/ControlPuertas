@@ -159,6 +159,7 @@ public class LoginUser extends javax.swing.JFrame {
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
        String pass = jPasswordField1.getText();
+       
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -203,11 +204,10 @@ public class LoginUser extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LoginUser().setVisible(true);
-            }
-        });
+
+        LoginUser a = new LoginUser();
+     a.setVisible(true);
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
