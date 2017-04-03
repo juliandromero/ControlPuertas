@@ -229,7 +229,7 @@ public class EstadosGenerales extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
