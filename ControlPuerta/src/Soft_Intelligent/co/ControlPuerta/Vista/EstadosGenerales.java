@@ -5,7 +5,7 @@
  */
 package Soft_Intelligent.co.ControlPuerta.Vista;
 
-import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory;
+
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
