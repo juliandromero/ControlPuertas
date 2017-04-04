@@ -48,16 +48,16 @@ public class Ajustes extends javax.swing.JFrame {
 
         jFrame1 = new javax.swing.JFrame();
         jLabel7 = new javax.swing.JLabel();
-        txtcantidadApertura = new javax.swing.JTextField();
+        txtcantidadApertura1 = new javax.swing.JTextField();
         jButtoncerrar = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         jToggleButton1 = new javax.swing.JToggleButton();
         checkdom = new javax.swing.JCheckBox();
         jButtonatras = new javax.swing.JButton();
         checklun = new javax.swing.JCheckBox();
-        txtipPuerta = new javax.swing.JTextField();
+        txtipPuerta1 = new javax.swing.JTextField();
         checkmar = new javax.swing.JCheckBox();
-        txtpuertaAcual = new javax.swing.JTextField();
+        txtpuertaAcual1 = new javax.swing.JTextField();
         checkmie = new javax.swing.JCheckBox();
         jLabel10 = new javax.swing.JLabel();
         checkjue = new javax.swing.JCheckBox();
@@ -68,7 +68,7 @@ public class Ajustes extends javax.swing.JFrame {
         new SpinnerDateModel(date, null, null, Calendar.HOUR_OF_DAY);
         jSpinner1 = new javax.swing.JSpinner(sm);
         jLabel1 = new javax.swing.JLabel();
-        txtnombrePuerta = new javax.swing.JTextField();
+        txtnombrePuerta1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         checksab = new javax.swing.JCheckBox();
         Date datee = new Date();
@@ -160,10 +160,10 @@ public class Ajustes extends javax.swing.JFrame {
                                         .addComponent(jLabel7)
                                         .addGap(56, 56, 56)))
                                 .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtpuertaAcual, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtpuertaAcual1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txtnombrePuerta)
-                                        .addComponent(txtipPuerta, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtnombrePuerta1)
+                                        .addComponent(txtipPuerta1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jFrame1Layout.createSequentialGroup()
                                         .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -174,7 +174,7 @@ public class Ajustes extends javax.swing.JFrame {
                                 .addGap(15, 15, 15)
                                 .addComponent(jLabel12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtcantidadApertura, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtcantidadApertura1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(97, Short.MAX_VALUE))
                     .addGroup(jFrame1Layout.createSequentialGroup()
                         .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -214,14 +214,14 @@ public class Ajustes extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(txtpuertaAcual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtpuertaAcual1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtnombrePuerta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtnombrePuerta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtipPuerta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtipPuerta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -232,7 +232,7 @@ public class Ajustes extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(txtcantidadApertura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtcantidadApertura1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -318,9 +318,9 @@ public class Ajustes extends javax.swing.JFrame {
         modificar.aplicar();
         String[]Puerta =new String[3];
         Puerta[0]=ModificarPuerta.txtnombrePuerta.getText();
-        txtnombrePuerta.setText(null);
+        txtnombrePuerta1.setText(null);
         Puerta[2]=ModificarPuerta.txtipPuerta.getText();
-        txtipPuerta.setText(null);
+        txtipPuerta1.setText(null);
         Puerta[3]=ModificarPuerta.jToggleButton1.getActionCommand();
         jToggleButton1.setText(null);
         table.addRow(Puerta);
@@ -390,9 +390,9 @@ public class Ajustes extends javax.swing.JFrame {
     public static javax.swing.JSpinner jSpinner2;
     public javax.swing.JTable jTable1;
     public static javax.swing.JToggleButton jToggleButton1;
-    public static javax.swing.JTextField txtcantidadApertura;
-    public static javax.swing.JTextField txtipPuerta;
-    public static javax.swing.JTextField txtnombrePuerta;
-    public static javax.swing.JTextField txtpuertaAcual;
+    public static javax.swing.JTextField txtcantidadApertura1;
+    public static javax.swing.JTextField txtipPuerta1;
+    public static javax.swing.JTextField txtnombrePuerta1;
+    public static javax.swing.JTextField txtpuertaAcual1;
     // End of variables declaration//GEN-END:variables
 }

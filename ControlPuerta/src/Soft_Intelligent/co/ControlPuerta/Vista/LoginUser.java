@@ -7,6 +7,7 @@ package Soft_Intelligent.co.ControlPuerta.Vista;
 
 import Soft_Intelligent.co.ControlPuerta.controlpuerta.ControlPuerta;
 import Soft_Intelligent.co.ControlPuerta.controlpuerta.*;
+import Soft_Intelligent.co.ControlPuerta.Modelo.*;
 
 /**
  *
@@ -23,6 +24,7 @@ public class LoginUser extends javax.swing.JFrame {
         setResizable(false);
         setTitle("Iniciar Sesion");
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -185,6 +187,10 @@ public class LoginUser extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
+        
+        ConectMySql con =  new ConectMySql();
+        con.conexion();
+    
         String Usuario = jTextField1.getText();
         String Pass = jPasswordField1.getText();
         MenuDeOpciones mdo = new MenuDeOpciones();
