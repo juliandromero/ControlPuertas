@@ -1,11 +1,6 @@
-
 package Soft_Intelligent.co.ControlPuerta.Vista;
 
 import Soft_Intelligent.co.ControlPuerta.controlpuerta.*;
-import java.util.Calendar;
-import java.util.Date;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerDateModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -13,10 +8,10 @@ import javax.swing.table.DefaultTableModel;
  * @author Julian Sanchez
  */
 public class Ajustes extends javax.swing.JFrame {
-    DefaultTableModel table;
-    
-    
-  //constructor de la clase 
+
+    DefaultTableModel tabla;
+
+    //constructor de la clase 
     public Ajustes() {
         initComponents();
         //Propiedades del frame
@@ -24,18 +19,15 @@ public class Ajustes extends javax.swing.JFrame {
         setResizable(false);
         setTitle("Modificar Puerta");
         //Propiedades de la tabla
-        table = new DefaultTableModel();
-        table.addColumn("Nombre");
-        table.addColumn("Ip");
-        table.addColumn("Estado");
-        this.jTable1.setModel(table);
-        String[]Puerta =new String[3];
-        Puerta[0]=ModificarPuerta.txtnombrePuerta.getText();
-        Puerta[2]=ModificarPuerta.txtipPuerta.getText();
-        Puerta[3]=ModificarPuerta.jToggleButton1.getActionCommand();
-        table.addRow(Puerta);
+        tabla = new DefaultTableModel();
+        tabla.addColumn("Nombre");
+        tabla.addColumn("Ip");
+        tabla.addColumn("Estado");
+        this.jTable1.setModel(tabla);
+
     }
-      Modificar modificar = new Modificar();
+    Modificar modificar = new Modificar();
+    //ModificarPuerta mp = new ModificarPuerta();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,236 +38,35 @@ public class Ajustes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jFrame1 = new javax.swing.JFrame();
-        jLabel7 = new javax.swing.JLabel();
-        txtcantidadApertura1 = new javax.swing.JTextField();
-        jButtoncerrar = new javax.swing.JButton();
-        jLabel13 = new javax.swing.JLabel();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        checkdom = new javax.swing.JCheckBox();
-        jButtonatras = new javax.swing.JButton();
-        checklun = new javax.swing.JCheckBox();
-        txtipPuerta1 = new javax.swing.JTextField();
-        checkmar = new javax.swing.JCheckBox();
-        txtpuertaAcual1 = new javax.swing.JTextField();
-        checkmie = new javax.swing.JCheckBox();
-        jLabel10 = new javax.swing.JLabel();
-        checkjue = new javax.swing.JCheckBox();
-        jLabel11 = new javax.swing.JLabel();
-        checkvie = new javax.swing.JCheckBox();
-        Date date = new Date();
-        SpinnerDateModel sm =
-        new SpinnerDateModel(date, null, null, Calendar.HOUR_OF_DAY);
-        jSpinner1 = new javax.swing.JSpinner(sm);
-        jLabel1 = new javax.swing.JLabel();
-        txtnombrePuerta1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        checksab = new javax.swing.JCheckBox();
-        Date datee = new Date();
-        SpinnerDateModel smm =
-        new SpinnerDateModel(datee, null, null, Calendar.HOUR_OF_DAY);
-        jSpinner2 = new javax.swing.JSpinner(smm);
-        jButtonaplicar = new javax.swing.JButton();
-        jLabel12 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         config = new javax.swing.JButton();
-
-        jLabel7.setText("Puerta actual");
-
-        jButtoncerrar.setText("Cerrar");
-        jButtoncerrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtoncerrarActionPerformed(evt);
-            }
-        });
-
-        jLabel13.setText("Repetir:");
-
-        jToggleButton1.setForeground(new java.awt.Color(51, 153, 0));
-        jToggleButton1.setText("Activar");
-
-        checkdom.setText("DOM");
-
-        jButtonatras.setText("Atras");
-        jButtonatras.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonatrasActionPerformed(evt);
-            }
-        });
-
-        checklun.setText("LUN");
-
-        checkmar.setText("MAR");
-
-        checkmie.setText("MIÉ");
-
-        jLabel10.setText("Hora de apertura");
-
-        checkjue.setText("JUE");
-
-        jLabel11.setText("a");
-
-        checkvie.setText("VIE");
-
-        JSpinner.DateEditor de = new JSpinner.DateEditor(jSpinner1, "hh:mm");
-        jSpinner1.setEditor(de);
-
-        jLabel1.setText("Nombre de la puerta");
-
-        jLabel2.setText("IP puerta");
-
-        checksab.setText("SÁB");
-
-        JSpinner.DateEditor dee = new JSpinner.DateEditor(jSpinner2, "hh:mm");
-        jSpinner2.setEditor(dee);
-
-        jButtonaplicar.setText("Aplicar");
-        jButtonaplicar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonaplicarActionPerformed(evt);
-            }
-        });
-
-        jLabel12.setText("Cantidad de veces que se puede abrir la puerta");
-
-        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
-        jFrame1.getContentPane().setLayout(jFrame1Layout);
-        jFrame1Layout.setHorizontalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jFrame1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jFrame1Layout.createSequentialGroup()
-                        .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jFrame1Layout.createSequentialGroup()
-                                .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jFrame1Layout.createSequentialGroup()
-                                        .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel1)
-                                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jFrame1Layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
-                                        .addGap(56, 56, 56)))
-                                .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtpuertaAcual1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txtnombrePuerta1)
-                                        .addComponent(txtipPuerta1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jFrame1Layout.createSequentialGroup()
-                                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(jFrame1Layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtcantidadApertura1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(97, Short.MAX_VALUE))
-                    .addGroup(jFrame1Layout.createSequentialGroup()
-                        .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(checkdom)
-                            .addComponent(jButtonatras))
-                        .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jFrame1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jToggleButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonaplicar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButtoncerrar)
-                                .addContainerGap())
-                            .addGroup(jFrame1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(checklun)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(checkmar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(checkmie)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(checkjue)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(checkvie)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(checksab)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
-            .addGroup(jFrame1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel13)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        jFrame1Layout.setVerticalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jFrame1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txtpuertaAcual1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtnombrePuerta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtipPuerta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11)
-                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(txtcantidadApertura1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(checkmar)
-                        .addComponent(checklun)
-                        .addComponent(checkmie)
-                        .addComponent(checkvie)
-                        .addComponent(checkjue)
-                        .addComponent(checksab))
-                    .addComponent(checkdom))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonaplicar)
-                    .addComponent(jButtoncerrar)
-                    .addComponent(jButtonatras)
-                    .addComponent(jToggleButton1))
-                .addGap(12, 12, 12))
-        );
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+                {},
+                {}
             },
             new String [] {
-                "null"
+
             }
         ));
         jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-        }
 
-        config.setText("config");
+        config.setText("Configurar");
         config.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 configActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Atras");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -284,51 +75,47 @@ public class Ajustes extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(config)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(324, 324, 324)
+                                .addComponent(config))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(config)
-                .addGap(157, 157, 157))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtoncerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtoncerrarActionPerformed
-        System.exit(0);
-
-    }//GEN-LAST:event_jButtoncerrarActionPerformed
-
-    private void jButtonatrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonatrasActionPerformed
-        MenuDeOpciones obj = new MenuDeOpciones();
-        obj.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jButtonatrasActionPerformed
-
-    private void jButtonaplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonaplicarActionPerformed
-        modificar.aplicar();
-        String[]Puerta =new String[3];
-        Puerta[0]=ModificarPuerta.txtnombrePuerta.getText();
-        txtnombrePuerta1.setText(null);
-        Puerta[2]=ModificarPuerta.txtipPuerta.getText();
-        txtipPuerta1.setText(null);
-        Puerta[3]=ModificarPuerta.jToggleButton1.getActionCommand();
-        jToggleButton1.setText(null);
-        table.addRow(Puerta);
-    }//GEN-LAST:event_jButtonaplicarActionPerformed
-
     private void configActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configActionPerformed
-    
+        ModificarPuerta obj = new ModificarPuerta();
+        obj.setVisible(true);
+
     }//GEN-LAST:event_configActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        /*MenuDeOpciones obj = new MenuDeOpciones();
+    obj.setVisible(true);
+    dispose();*/
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -366,33 +153,9 @@ public class Ajustes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JCheckBox checkdom;
-    public static javax.swing.JCheckBox checkjue;
-    public static javax.swing.JCheckBox checklun;
-    public static javax.swing.JCheckBox checkmar;
-    public static javax.swing.JCheckBox checkmie;
-    public static javax.swing.JCheckBox checksab;
-    public static javax.swing.JCheckBox checkvie;
     private javax.swing.JButton config;
-    private javax.swing.JButton jButtonaplicar;
-    private javax.swing.JButton jButtonatras;
-    private javax.swing.JButton jButtoncerrar;
-    private javax.swing.JFrame jFrame1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JSpinner jSpinner1;
-    public static javax.swing.JSpinner jSpinner2;
-    public javax.swing.JTable jTable1;
-    public static javax.swing.JToggleButton jToggleButton1;
-    public static javax.swing.JTextField txtcantidadApertura1;
-    public static javax.swing.JTextField txtipPuerta1;
-    public static javax.swing.JTextField txtnombrePuerta1;
-    public static javax.swing.JTextField txtpuertaAcual1;
+    public static javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

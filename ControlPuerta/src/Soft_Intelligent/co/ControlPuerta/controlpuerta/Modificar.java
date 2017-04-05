@@ -12,21 +12,21 @@ public class Modificar {
     public Modificar(){
      
     }
-    String nombrePuerta;
-    int ipPuerta, cantidadApertura/*, hora1, hora2*/;
+    public static String nombrePuerta="";
+    public static int ipPuerta=0, cantidadApertura/*, hora1, hora2*/;
     
    
     
     
     public void aplicar(){
     nombrePuerta=ModificarPuerta.txtnombrePuerta.getText();
-    cantidadApertura=Integer.parseInt(ModificarPuerta.txtcantidadApertura.getText());
+//    cantidadApertura=Integer.parseInt(ModificarPuerta.txtcantidadApertura.getText());
     //hora1=ModificarPuerta.de.getText();
     //ipPuerta=
     
     
     
-    //JOptionPane.showMessageDialog(null,cantidadApertura+ " " + nombrePuerta+" ", " mensaje ", JOptionPane.PLAIN_MESSAGE);
+    JOptionPane.showMessageDialog(null,cantidadApertura+ " " + nombrePuerta+" ", " mensaje ", JOptionPane.PLAIN_MESSAGE);
            
     } 
     
