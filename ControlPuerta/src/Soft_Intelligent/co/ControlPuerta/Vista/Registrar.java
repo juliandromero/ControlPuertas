@@ -190,7 +190,7 @@ public class Registrar extends javax.swing.JFrame {
         reg.setAlias(jTextField6.getText());
         reg.setContraseña(jPasswordField1.getText());
         
-        bdreg.guardar(Conexion, reg);
+      //  bdreg.guardar(Conexion, reg);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
