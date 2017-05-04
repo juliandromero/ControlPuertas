@@ -10,7 +10,7 @@ import java.sql.*;
  * @author Programacion
  */
 public class ConectMySql {
-    Connection con = null;
+    private static Connection con = null;
     public Connection conexion(){
        try{
            Class.forName("com.mysql.jdbc.Driver");
