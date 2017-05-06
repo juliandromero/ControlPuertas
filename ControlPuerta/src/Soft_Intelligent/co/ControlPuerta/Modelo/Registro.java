@@ -19,8 +19,11 @@ public class Registro {
     public void guardar(Connection Conexion, RegistroControl registro) throws SQLException {
         try {
             PreparedStatement Guardar = null;
-            if (registro.getCedula() == 0) {
-                Guardar = Conexion.prepareStatement("INSERT INTO " + this.tabla + "(Cedula, Nombre, Apellido, Telefono, Email, Alias, Contraseña) VALUES (?,?,?,?,?,?,?)");
+            System.out.println("ingreso try");
+            if (0 == registro.getCedula()) {
+                System.out.println("ingreso else");
+            } else {
+                Guardar = Conexion.prepareStatement("INSERT INTO " + this.tabla + "(Cedula, Nombre, Apellido, Telefono, Email, Alias, Contraseña) VALUES(?,?,?,?,?,?,?)");
                 Guardar.setInt(1, registro.getCedula());
                 Guardar.setString(2, registro.getNombre());
                 Guardar.setString(3, registro.getApellido());
@@ -28,10 +31,11 @@ public class Registro {
                 Guardar.setString(5, registro.getEmail());
                 Guardar.setString(6, registro.getAlias());
                 Guardar.setString(7, registro.getContraseña());
-            } else {
+                System.out.println("ingreso if");
             }
             Guardar.executeUpdate();
         } catch (SQLException e) {
+            System.out.println("ingreso catch");
             throw new SQLException(e);
         }
     }

@@ -11,10 +11,10 @@ package Soft_Intelligent.co.ControlPuerta.controlpuerta;
  */
 public class RegistroControl {
 
-    private Integer Cedula;
+    private int Cedula;
     private String Nombre;
     private String Apellido;
-    private Integer Telefono;
+    private int Telefono;
     private String Email;
     private String Alias;
     private String Contraseña;
@@ -47,7 +47,7 @@ public class RegistroControl {
         return Contraseña;
     }
 
-    public void setCedula(Integer Cedula) {
+    public void setCedula(int Cedula) {
         this.Cedula = Cedula;
     }
 

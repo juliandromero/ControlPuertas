@@ -20,11 +20,10 @@ public class LoginUser extends javax.swing.JFrame {
      */
     public LoginUser() {
         initComponents();
-        setLocation(350,350);
+        setLocation(350, 350);
         setResizable(false);
         setTitle("Iniciar Sesion");
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -179,6 +178,13 @@ public class LoginUser extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        Registrar reg = new Registrar();
+
+        reg.setVisible(true);
+        dispose();
+        ConectMySql con = new ConectMySql();
+        con.conexion();
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
@@ -187,10 +193,9 @@ public class LoginUser extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        
-        ConectMySql con =  new ConectMySql();
+        ConectMySql con = new ConectMySql();
         con.conexion();
-    
+
         String Usuario = jTextField1.getText();
         String Pass = jPasswordField1.getText();
         MenuDeOpciones mdo = new MenuDeOpciones();
@@ -199,18 +204,16 @@ public class LoginUser extends javax.swing.JFrame {
         cp.setUsuario(Usuario);
         cp.setPass(Pass);
         if (cp.ArregloLogIn()) {
-        mdo.setVisible(true);
-        dispose();
-        }
-        else{
-        jLabel3.setText("Contrasena o Usuario Incorrecto");
+            mdo.setVisible(true);
+            dispose();
+        } else {
+            jLabel3.setText("Contrasena o Usuario Incorrecto");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel3AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jLabel3AncestorAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel3AncestorAdded
-
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

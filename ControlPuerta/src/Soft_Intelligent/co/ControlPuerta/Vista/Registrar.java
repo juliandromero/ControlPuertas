@@ -9,8 +9,13 @@ package Soft_Intelligent.co.ControlPuerta.Vista;
  *
  * @author Programacion
  */
+import Soft_Intelligent.co.ControlPuerta.Modelo.ConectMySql;
 import Soft_Intelligent.co.ControlPuerta.Modelo.Registro;
 import Soft_Intelligent.co.ControlPuerta.controlpuerta.*;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 public class Registrar extends javax.swing.JFrame {
 
     /**
@@ -62,7 +67,7 @@ public class Registrar extends javax.swing.JFrame {
 
         jLabel7.setText("Contraseña:");
 
-        jTextField1.setText("jTextField1");
+        jTextField1.setText("123");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -73,7 +78,12 @@ public class Registrar extends javax.swing.JFrame {
 
         jTextField3.setText("jTextField3");
 
-        jTextField4.setText("jTextField4");
+        jTextField4.setText("312321");
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
 
         jTextField5.setText("jTextField5");
 
@@ -177,20 +187,26 @@ public class Registrar extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        Registro bdreg = new Registro();
-        RegistroControl reg = new RegistroControl();
-        int ced = Integer.parseInt(jTextField1.getText());
-        int tel = Integer.parseInt(jTextField4.getText());
-        reg.setCedula(ced);
-        reg.setTelefono(tel);
-        reg.setNombre(jTextField2.getText());
-        reg.setApellido(jTextField3.getText());
-        reg.setEmail(jTextField5.getText());
-        reg.setAlias(jTextField6.getText());
-        reg.setContraseña(jPasswordField1.getText());
-        
-      //  bdreg.guardar(Conexion, reg);
+        try {
+            // TODO add your handling code here:
+            Registro bdreg = new Registro();
+            RegistroControl reg = new RegistroControl();
+            ConectMySql con = new ConectMySql();
+            int ced = Integer.parseInt(jTextField1.getText());
+            int tel = Integer.parseInt(jTextField4.getText());
+            reg.setCedula(ced);
+            reg.setTelefono(tel);
+            reg.setNombre(jTextField2.getText());
+            reg.setApellido(jTextField3.getText());
+            reg.setEmail(jTextField5.getText());
+            reg.setAlias(jTextField6.getText());
+            reg.setContraseña(jPasswordField1.getText());
+            
+            bdreg.guardar(con.conexion(), reg);
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(this, "Ha surgido un error y no se ha podido guardar el registro.");
+        }
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -199,6 +215,10 @@ public class Registrar extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4ActionPerformed
 
     /**
      * @param args the command line arguments
