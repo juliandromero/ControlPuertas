@@ -35,8 +35,18 @@ public class EstadosGenerales extends JFrame {
     JTable miTabla1;
     JScrollPane mibarra1;
     JTextField Field;
+    JTextField Field2;
+    JTextField Field3;
+    JTextField Field4;
     JLabel Label;
-    JButton Boton;
+    JButton Boton1;
+    JButton Boton2;
+    JButton Boton3;
+    String Estado;
+    String Nombre;
+    String Ubicacion;
+    String IP;
+    EstadosGeneralesControl coneg;
 
     public EstadosGenerales() {
         setSize(800, 400);
@@ -56,8 +66,6 @@ public class EstadosGenerales extends JFrame {
 
     private void InicializaFormulario() {
 
-       
-
         Label = new JLabel("Nombre");
         Label.setBounds(27, 70, 230, 30);
         getContentPane().add(Label);
@@ -65,47 +73,71 @@ public class EstadosGenerales extends JFrame {
         Field = new JTextField();
         Field.setBounds(100, 70, 230, 30);
         getContentPane().add(Field);
-        String Nombre = Field.getText();
-        
+
         Label = new JLabel("Ubicacion");
         Label.setBounds(27, 110, 230, 30);
         getContentPane().add(Label);
 
-        Field = new JTextField();
-        Field.setBounds(100, 110, 230, 30);
-        getContentPane().add(Field);
-        String Ubicacion = Field.getText();
+        Field2 = new JTextField();
+        Field2.setBounds(100, 110, 230, 30);
+        getContentPane().add(Field2);
 
         Label = new JLabel("IP");
         Label.setBounds(380, 70, 230, 30);
         getContentPane().add(Label);
 
-        Field = new JTextField();
-        Field.setBounds(453, 70, 230, 30);
-        getContentPane().add(Field);
-        String IP = Field.getText();
+        Field3 = new JTextField();
+        Field3.setBounds(453, 70, 230, 30);
+        getContentPane().add(Field3);
 
         Label = new JLabel("Estado");
         Label.setBounds(380, 110, 230, 30);
         getContentPane().add(Label);
 
-        Field = new JTextField();
-        Field.setBounds(453, 110, 230, 30);
-        getContentPane().add(Field);
-        String Estado = Field.getText();
-        
-        EstadosGeneralesControl coneg = new EstadosGeneralesControl();
-        
-        coneg.setEstado(Estado);
-        coneg.setID_Estado(Estado);
-        coneg.setNombre(Nombre);
-        coneg.setIP(IP);
-        coneg.setUbicacion(Ubicacion);
-        
-        Boton = new JButton("Adicionar");
-        Boton.setBounds(500, 340, 80, 25);
-        getContentPane().add(Boton);
-        Boton.addActionListener((e) -> {
+        Field4 = new JTextField();
+        Field4.setBounds(453, 110, 230, 30);
+        getContentPane().add(Field4);
+
+        coneg = new EstadosGeneralesControl();
+
+    }
+
+    private void InicializaBotones() {
+
+        Boton1 = new JButton("Eliminar");
+        Boton1.setBounds(600, 340, 80, 25);
+        getContentPane().add(Boton1);
+
+        Boton2 = new JButton("Atras");
+        Boton2.setBounds(700, 340, 80, 25);
+        getContentPane().add(Boton2);
+        Boton2.addActionListener((e) -> {
+
+            MenuDeOpciones mdo = new MenuDeOpciones();
+            mdo.setVisible(true);
+            dispose();
+
+        });
+
+        Boton3 = new JButton("Adicionar");
+        Boton3.setBounds(500, 340, 80, 25);
+        getContentPane().add(Boton3);
+        System.out.println("hola mundo");
+        Boton3.addActionListener((e) -> {
+            System.out.println("hola mundo2");
+            Estado = Field4.getText();
+            IP = Field3.getText();
+            Ubicacion = Field2.getText();
+            Nombre = Field.getText();
+            coneg.setEstado(Estado);
+            System.out.println(Estado);
+            coneg.setID_Estado(Estado);
+            coneg.setNombre(Nombre);
+            System.out.println(Nombre);
+            coneg.setIP(IP);
+            System.out.println(IP);
+            coneg.setUbicacion(Ubicacion);
+            System.out.println(Ubicacion);
 
             EstadoGeneral bdeg = new EstadoGeneral();
 
@@ -117,25 +149,6 @@ public class EstadosGenerales extends JFrame {
                 System.out.println(ex.getMessage());
                 JOptionPane.showMessageDialog(this, "Ha surgido un error y no se ha podido guardar el registro.");
             }
-
-        });
-    }
-
-    private void InicializaBotones() {
-       
-
-        Boton = new JButton("Eliminar");
-        Boton.setBounds(600, 340, 80, 25);
-        getContentPane().add(Boton);
-
-        Boton = new JButton("Atras");
-        Boton.setBounds(700, 340, 80, 25);
-        getContentPane().add(Boton);
-        Boton.addActionListener((e) -> {
-
-            MenuDeOpciones mdo = new MenuDeOpciones();
-            mdo.setVisible(true);
-            dispose();
 
         });
     }
