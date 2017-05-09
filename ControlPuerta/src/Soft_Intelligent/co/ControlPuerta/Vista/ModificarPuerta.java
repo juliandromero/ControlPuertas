@@ -1,5 +1,6 @@
 package Soft_Intelligent.co.ControlPuerta.Vista;
 
+import Soft_Intelligent.co.ControlPuerta.Modelo.Configuracion;
 import Soft_Intelligent.co.ControlPuerta.controlpuerta.*;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -353,6 +354,7 @@ public class ModificarPuerta extends javax.swing.JFrame {
         primera[2] = jToggleButton1.getText();
         table.addRow(primera);
         modificar.aplicar();
+        Modificar mod = new Modificar();
 
         Object data[] = {Modificar.nombrePuerta, Modificar.ipPuerta, jToggleButton1};
         x.tabla.addRow(data);
@@ -361,7 +363,13 @@ public class ModificarPuerta extends javax.swing.JFrame {
         System.out.println(a);
         
         
-        System.out.println(checkdom.isSelected());
+        mod.setDom(checkdom.isSelected());
+        mod.setLun(checklun.isSelected());
+        mod.setMar(checkmar.isSelected());
+        mod.setMie(checkmie.isSelected());
+        mod.setJue(checkjue.isSelected());
+        mod.setVie(checkvie.isSelected());
+        mod.setSab(checksab.isSelected());
     }//GEN-LAST:event_jButtonaplicarActionPerformed
 
     private void jButtonatrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonatrasActionPerformed

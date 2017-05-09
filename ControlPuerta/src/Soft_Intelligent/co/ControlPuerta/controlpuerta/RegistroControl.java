@@ -19,6 +19,26 @@ public class RegistroControl {
     private String Alias;
     private String Contraseña;
 
+    public RegistroControl(int Cedula, String Nombre, String Apellido, int Telefono, String Email, String Alias, String Contraseña) {
+        this.Cedula = Cedula;
+        this.Nombre = Nombre;
+        this.Apellido = Apellido;
+        this.Telefono = Telefono;
+        this.Email = Email;
+        this.Alias = Alias;
+        this.Contraseña = Contraseña;
+    }
+    
+
+    public RegistroControl(String usuario, String Contraseña) {
+       this.Alias = usuario;
+       this.Contraseña = Contraseña;     
+    }
+
+    public RegistroControl() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getCedula() {
         return Cedula;
     }

@@ -8,6 +8,11 @@ package Soft_Intelligent.co.ControlPuerta.Vista;
 import Soft_Intelligent.co.ControlPuerta.controlpuerta.ControlPuerta;
 import Soft_Intelligent.co.ControlPuerta.controlpuerta.*;
 import Soft_Intelligent.co.ControlPuerta.Modelo.*;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -41,7 +46,7 @@ public class LoginUser extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        ingreso = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
@@ -89,10 +94,10 @@ public class LoginUser extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Ingresar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ingreso.setText("Ingresar");
+        ingreso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ingresoActionPerformed(evt);
             }
         });
 
@@ -133,7 +138,7 @@ public class LoginUser extends javax.swing.JFrame {
                         .addComponent(jLabel3))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jInternalFrame2Layout.createSequentialGroup()
                         .addGap(56, 56, 56)
-                        .addComponent(jButton1)
+                        .addComponent(ingreso)
                         .addGap(35, 35, 35)
                         .addComponent(jButton3)))
                 .addContainerGap(37, Short.MAX_VALUE))
@@ -151,7 +156,7 @@ public class LoginUser extends javax.swing.JFrame {
                     .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(ingreso)
                     .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(jLabel3)
@@ -191,10 +196,16 @@ public class LoginUser extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+    private void ingresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresoActionPerformed
+        Registro reg = new Registro();
         ConectMySql con = new ConectMySql();
-        con.conexion();
+        try {
+            List<RegistroControl> usuarios = reg.leer(con.conexion()) ;
+            System.out.println(usuarios);
+         }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+         }
 
         String Usuario = jTextField1.getText();
         String Pass = jPasswordField1.getText();
@@ -209,7 +220,7 @@ public class LoginUser extends javax.swing.JFrame {
         } else {
             jLabel3.setText("Contrasena o Usuario Incorrecto");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_ingresoActionPerformed
 
     private void jLabel3AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jLabel3AncestorAdded
         // TODO add your handling code here:
@@ -251,7 +262,7 @@ public class LoginUser extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton ingreso;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JInternalFrame jInternalFrame1;

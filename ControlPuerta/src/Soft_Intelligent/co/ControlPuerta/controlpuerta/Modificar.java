@@ -9,6 +9,29 @@ import javax.swing.JOptionPane;
  */
 public class Modificar {
     private boolean lun, mar, mie, jue, vie, sab, dom;
+    private final Integer IdAlarma;
+
+    public Modificar(boolean lun, boolean mar, boolean mie, boolean jue, boolean vie, boolean sab, boolean dom, Integer IdAlarma) {
+        this.lun = lun;
+        this.mar = mar;
+        this.mie = mie;
+        this.jue = jue;
+        this.vie = vie;
+        this.sab = sab;
+        this.dom = dom;
+        this.IdAlarma = IdAlarma;
+    }
+
+    public Modificar() {
+        this.lun = false;
+        this.mar = false;
+        this.mie = false;
+        this.jue = false;
+        this.vie = false;
+        this.sab = false;
+        this.dom = false;
+        this.IdAlarma = null;
+    }
 
     public boolean isLun() {
         return lun;
@@ -65,12 +88,14 @@ public class Modificar {
     public void setDom(boolean dom) {
         this.dom = dom;
     }
-    
-    
-    
-    public Modificar(){
-     
+
+    public Integer getIdAlarma() {
+        return IdAlarma;
     }
+    
+    
+    
+
     public static String nombrePuerta="";
     public static int ipPuerta=0, cantidadApertura/*, hora1, hora2*/;
     
