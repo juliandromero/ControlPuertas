@@ -20,6 +20,7 @@ import java.awt.event.ActionListener;
 import java.math.MathContext;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -29,7 +30,7 @@ import javax.swing.JTextField;
  *
  * @author Programacion
  */
-public class EstadosGenerales extends JFrame {
+public class EstadosGenerales extends JFrame implements ActionListener {
 
     private JLabel labelTitulo;
     JTable miTabla1;
@@ -48,16 +49,29 @@ public class EstadosGenerales extends JFrame {
     String IP;
     EstadosGeneralesControl coneg;
 
+    private ArrayList<EstadosGeneralesControl> miLista;
+
+    public static String ELIMINAR = "ELIMINAR";
+    public static String ADICIONAR = "ADICIONAR";
+
+    EstadoGeneral bdeg;
+
     public EstadosGenerales() {
         setSize(800, 400);
         setTitle("Puerta : Estados Generales");
         setLocationRelativeTo(null);
         setResizable(false);
 
+        miLista = new ArrayList();
+
         InicializaFormulario();
         InicializaTabla();
         construirTabla();
         InicializaBotones();
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        bdeg = new EstadoGeneral();
+
     }
 
     public String getNombre(String Nombre) {
@@ -106,6 +120,8 @@ public class EstadosGenerales extends JFrame {
 
         Boton1 = new JButton("Eliminar");
         Boton1.setBounds(600, 340, 80, 25);
+        Boton1.addActionListener(this);
+        Boton1.setActionCommand(ELIMINAR);
         getContentPane().add(Boton1);
 
         Boton2 = new JButton("Atras");
@@ -122,24 +138,24 @@ public class EstadosGenerales extends JFrame {
         Boton3 = new JButton("Adicionar");
         Boton3.setBounds(500, 340, 80, 25);
         getContentPane().add(Boton3);
-        System.out.println("hola mundo");
+
+        Boton3.setActionCommand(ADICIONAR);
+        getContentPane().add(Boton3);
+
         Boton3.addActionListener((e) -> {
-            System.out.println("hola mundo2");
             Estado = Field4.getText();
             IP = Field3.getText();
             Ubicacion = Field2.getText();
             Nombre = Field.getText();
             coneg.setEstado(Estado);
-            System.out.println(Estado);
+//            System.out.println(Estado);
             coneg.setID_Estado(Estado);
             coneg.setNombre(Nombre);
-            System.out.println(Nombre);
+//            System.out.println(Nombre);
             coneg.setIP(IP);
-            System.out.println(IP);
+//            System.out.println(IP);
             coneg.setUbicacion(Ubicacion);
-            System.out.println(Ubicacion);
-
-            EstadoGeneral bdeg = new EstadoGeneral();
+//            System.out.println(Ubicacion);
 
             ConectMySql con = new ConectMySql();
 
@@ -181,7 +197,7 @@ public class EstadosGenerales extends JFrame {
     private String[][] obtenerMatriz() {
 
         EstadoGeneral EstGen = new EstadoGeneral();
-        ArrayList<EstadosGeneralesControl> miLista = EstGen.BuscaDisp();
+        miLista = EstGen.BuscaDisp();
 
         String matrizInfo[][] = new String[miLista.size()][5];
 
@@ -194,6 +210,12 @@ public class EstadosGenerales extends JFrame {
         }
 
         return matrizInfo;
+    }
+
+    public void borrarLista(int ID) {
+        //miLista.clear();
+        bdeg.eliminarDisp(ID);
+
     }
 
     /**
@@ -264,6 +286,30 @@ public class EstadosGenerales extends JFrame {
         });
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String comando = e.getActionCommand();
+        if (comando == ELIMINAR) {
+            int posicion = miTabla1.getSelectedRow();
+            int ID = miLista.get(posicion).getID();
+            borrarLista(ID);
+            miLista = new ArrayList();
+            //InicializaTabla();
+            construirTabla();
+        }
+    }
+
+    public void actionPerformed2(ActionEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String comando = e.getActionCommand();
+        if (comando == ADICIONAR) {
+
+            miLista = new ArrayList();
+            //InicializaTabla();
+            construirTabla();
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

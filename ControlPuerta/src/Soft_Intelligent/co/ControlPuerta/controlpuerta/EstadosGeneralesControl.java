@@ -11,21 +11,14 @@ package Soft_Intelligent.co.ControlPuerta.controlpuerta;
  */
 public class EstadosGeneralesControl {
 
-    private Integer ID;
+    private int ID;
     private String Nombre;
     private String Ubicacion;
     private String IP;
     private String Estado;
     private int ID_Estado;
 
-/*    public EstadosGeneralesControl(int ID, String Nombre, String Ubicacion, String IP, String Estado) {
-        this.ID = ID;
-        this.Nombre = Nombre;
-        this.Ubicacion = Ubicacion;
-        this.IP = IP;
-    }
-*/
-    public Integer getID() {
+    public int getID() {
         return ID;
     }
 
@@ -61,7 +54,7 @@ public class EstadosGeneralesControl {
         this.ID_Estado = ID_Estado;
     }
 
-    public void setID(Integer ID) {
+    public void setID(int ID) {
         this.ID = ID;
     }
 

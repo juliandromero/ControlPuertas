@@ -22,13 +22,12 @@ import javax.swing.JOptionPane;
  */
 public class EstadoGeneral {
 
-    
     private final String tabla = "Dispositivo";
 
     public void Crear(Connection Conexion, EstadosGeneralesControl EstadoGeneral) throws SQLException {
         try {
             PreparedStatement Guardar = null;
-
+            System.out.println("INSERT INTO " + this.tabla + "( Nombre, Ubicacion, IP,ID_Estado) VALUES(?,?,?,?)");
             Guardar = Conexion.prepareStatement("INSERT INTO " + this.tabla + "( Nombre, Ubicacion, IP,ID_Estado) VALUES(?,?,?,?)");
             Guardar.setString(1, EstadoGeneral.getNombre());
             Guardar.setString(2, EstadoGeneral.getUbicacion());
@@ -36,11 +35,42 @@ public class EstadoGeneral {
             Guardar.setInt(4, EstadoGeneral.getID_Estado());
 
             Guardar.executeUpdate();
+            System.out.println("Registro Adicionado");
 
         } catch (SQLException e) {
             throw new SQLException(e);
         }
     }
+//    public void Eliminar(Connection Conexion, EstadosGeneralesControl EstadoGeneral) throws SQLException {
+//        try {
+//            PreparedStatement Insert = null;
+//
+//            Insert = Conexion.prepareStatement("Delete " + this.tabla + "Where ID =? )");
+//            Insert.setInt(1, EstadoGeneral.getID_Estado());
+//
+//            Insert.executeUpdate();
+//
+//        } catch (SQLException e) {
+//            throw new SQLException(e);
+//        }
+//    }
+
+    public void eliminarDisp(int ID) {
+        ConectMySql conex = new ConectMySql();
+        EstadosGeneralesControl Puer;
+
+        try {
+            Statement estatuto = conex.conexion().createStatement();
+            System.out.println("Delete From " + this.tabla + " Where ID = " + ID);
+            estatuto.execute("Delete From " + this.tabla + " Where ID = " + ID);
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al eliminar el registro X dependencia en evento");
+            System.out.println(e.getMessage());
+        }
+
+    }
+
     public ArrayList<EstadosGeneralesControl> BuscaDisp() {
 
         ConectMySql conex = new ConectMySql();
