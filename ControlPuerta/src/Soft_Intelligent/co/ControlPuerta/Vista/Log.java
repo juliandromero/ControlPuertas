@@ -1,8 +1,10 @@
 
 package Soft_Intelligent.co.ControlPuerta.Vista;
+import Soft_Intelligent.co.ControlPuerta.Modelo.ConectMySql;
 import Soft_Intelligent.co.ControlPuerta.controlpuerta.CLog;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import  javax.swing.table.DefaultTableModel; 
@@ -15,6 +17,16 @@ import javax.swing.table.TableRowSorter;
 public class Log extends javax.swing.JFrame {
         DefaultTableModel modelo;
     private TableModel dtm;
+    private Object jTextFiel2;
+    private Object jTextFiel3;
+    private Object jTextFiel4;
+    private Object jTextFiel5;
+    private Object coneg;
+    private boolean IP;
+    private boolean Hi;
+    private boolean Hf;
+    private boolean Estado;
+    private Object jTextFiel;
         
     /**
      * Creates new form pprincipal
@@ -28,6 +40,7 @@ public class Log extends javax.swing.JFrame {
         modelo.addColumn("hi",lg.rellenarHoraI());
         modelo.addColumn("hf",lg.rellenarHoraf());
         modelo.addColumn("estado",lg.rellenarEstado());
+        modelo.addColumn("ubicacion",lg.rellenarEstado());
         this.jTable1.setModel(modelo);
                 
     }
@@ -55,6 +68,7 @@ public class Log extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jtxtfiltro = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        jTextField6 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,13 +89,13 @@ public class Log extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Puerta", "IP", "Hora inicial", "Hora final", "Estado"
+                "Puerta", "IP", "Hora inicial", "Hora final", "Estado", "ubicacion"
             }
         ));
         jScrollPane2.setViewportView(jTable1);
@@ -90,6 +104,12 @@ public class Log extends javax.swing.JFrame {
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
             }
         });
 
@@ -134,26 +154,25 @@ public class Log extends javax.swing.JFrame {
                         .addGap(53, 53, 53))
                     .addGroup(jInternalFrame1Layout.createSequentialGroup()
                         .addGap(13, 13, 13)
-                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jInternalFrame1Layout.createSequentialGroup()
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
+                                .addGap(18, 18, 18)
                                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(51, 51, 51)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
+                                .addGap(18, 18, 18)
                                 .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(35, 35, 35)
+                                .addGap(18, 18, 18)
                                 .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(27, 27, 27)
+                                .addComponent(jTextField6))
+                            .addComponent(jLabel3)
                             .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jtxtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE))))))
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jtxtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,7 +183,7 @@ public class Log extends javax.swing.JFrame {
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jtxtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -172,7 +191,8 @@ public class Log extends javax.swing.JFrame {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -194,8 +214,8 @@ public class Log extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 7, Short.MAX_VALUE))
         );
 
         pack();
@@ -203,24 +223,62 @@ public class Log extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        
+            Puerta = jTextFiel.getText();
+            IP = jTextFiel2.getText();
+            Hi = jTextFiel3.getText();
+            Hf = jTextFiel4.getText();
+            estado = jTextFiel5.getText();
+            ubicacion = jTextFiel5.getText();
+            coneg.setPuerta(Puerta);
+            System.out.println();
+            coneg.setIP(IP);
+            System.out.println(IP);
+            coneg.setUbicacion(Hi);
+            System.out.println(Hi);
+            coneg.setUbicacion(Hf);
+            System.out.println(Hf);
+            coneg.setID_Estado(Estado);
+            System.out.println(Estado);
+            coneg.setPuerta(Ubicacion);
+            System.out.Ubicacion();
 
-      String []Datos;
-            Datos = new String[5];
-        Datos[0]= jTextField1.getText();
-        jTextField1.setText(null);
-        Datos[1]= jTextField2.getText();
-        jTextField1.setText(null);
-        Datos[2]= jTextField3.getText();
-        jTextField1.setText(null);
-        Datos[3]= jTextField4.getText();
-        jTextField1.setText(null);
-        Datos[4]= jTextField5.getText();
-        jTextField1.setText(null);
-        modelo.addRow(Datos);
+            Log bdeg = new Log();
+
+            ConectMySql con = new ConectMySql();
+
+            try {
+                bdeg.Crear(con.conexion(), coneg);
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+                JOptionPane.showMessageDialog(this, "Ha surgido un error y no se ha podido guardar el registro.");
+            }
+
+
+jTable1 = new javax.swing.JTable();
+
+jTable1.setModel(new javax.swing.table.DefaultTableModel(
+    new Object [][] {
+        {null, null, null, null, null, null},
+        {null, null, null, null, null, null},
+        {null, null, null, null, null, null},
+        {null, null, null, null, null, null}
+    },
+    new String [] {
+        "Puerta", "IP", "Hora inicial", "Hora final", "Estado", "ubicacion"
+    }
+));
+
+
+
+jScrollPane2.setViewportView(jTable1);
+     
 
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
+  
+  
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int filaseleccionada= jTable1.getSelectedRow();
         if(filaseleccionada>=0){
@@ -262,6 +320,10 @@ TableRowSorter trs = null;
         
         
     }//GEN-LAST:event_jtxtfiltroKeyTyped
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -282,6 +344,10 @@ TableRowSorter trs = null;
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Log.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+            //</editor-fold>
+            //</editor-fold>
+            //</editor-fold>
+            //</editor-fold>
             //</editor-fold>
             //</editor-fold>
             //</editor-fold>
@@ -312,6 +378,7 @@ TableRowSorter trs = null;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jtxtfiltro;
     // End of variables declaration//GEN-END:variables
 
@@ -324,4 +391,8 @@ TableRowSorter trs = null;
         
         
     }
-}
+
+    
+    }
+
+ }
