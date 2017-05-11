@@ -5,9 +5,7 @@
  */
 package Soft_Intelligent.co.ControlPuerta.Modelo;
 
-import Soft_Intelligent.co.ControlPuerta.Vista.Log;
 import Soft_Intelligent.co.ControlPuerta.controlpuerta.EstadosGeneralesControl;
-import Soft_Intelligent.co.ControlPuerta.controlpuerta.CLog;
 import Soft_Intelligent.co.ControlPuerta.controlpuerta.LogModeControl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -32,13 +30,13 @@ public class LogModelo {
 
             Guardar = Conexion.prepareStatement("INSERT INTO " + this.tabla + "( Puerta, IP, Hi, Hf, Estado, Ubicacion) VALUES(?,?,?,?,?,?)");
             Guardar.setString(1, Log.getPuerta());
-            Guardar.setString(2, Log.getIp());
+            Guardar.setString(2, Log.getIP());
             Guardar.setString(3, Log.getHi());
             Guardar.setString(4, Log.getHi());
             Guardar.setString(5, Log.getHf());
             Guardar.setString(6, Log.getEstado());
             Guardar.setString(7, Log.getUbicacion());
-            Guardar.setInt(5, EstadoGeneral.getID_Estado());
+            Guardar.setInt(5, Log.getID_Estado());
 
             Guardar.executeUpdate();
 
@@ -46,26 +44,31 @@ public class LogModelo {
             throw new SQLException(e);
         }
     }
-    public ArrayList<LogModelo> Logactividad() {
+    public ArrayList<LogModeControl> Logactividad() {
 
         ConectMySql conex = new ConectMySql();
-        ArrayList<Logactividad> Lista = new ArrayList<Logactividad>();
-        Logactividad Puerta;
+        ArrayList<LogModeControl> Lista = new ArrayList<LogModeControl>();
+        LogModeControl Puerta;
         try {
 
             Statement estatuto = conex.conexion().createStatement();
-            ResultSet rs = estatuto.executeQuery("SELECT Dis.ID,Dis.Nombre,Dis.Ubicacion,Dis.IP,Est.Nombre as Estado FROM Dispositivo Dis inner join Estado Est on Dis.ID_Estado = Est.ID Order by ID");
+            ResultSet rs = estatuto.executeQuery("Select Dis.Nombre,Dis.IP,Ala.HoraIni,Ala.HoraFin,Est.Nombre As Estado,Acc.nombre As Accion,Usu.Nombre As Usuario from Evento Eve\n" +
+"inner join alarma Ala on  eve.ID_Alarm=Ala.ID\n" +
+"inner join Dispositivo Dis on  eve.ID_Disp=Dis.ID\n" +
+"inner join Accion Acc on  eve.ID_Acci=Acc.ID\n" +
+"inner join Usuario Usu on  eve.Cedula=Usu.Cedula\n" +
+"inner join Estado Est on  Est.ID=Dis.ID_Estado");
 
             while (rs.next()) {
-                Puer = new EstadosGeneralesControl();
-                Puer.setID(Integer.parseInt(rs.getString("ID")));
-                Puer.setPuerta(rs.getString("Puerta"));
-                Puer.setUbicacion(rs.getString("Ubicacion"));
-                Puer.setIP(rs.getString("IP"));
-                Puer.setEstado(rs.getString("Estado"));
-                Puer.setEstado(rs.getString("Hi"));
-                Puer.setEstado(rs.getString("Hi"));
-                Lista.add(Puer);
+                Puerta = new LogModeControl();
+                Puerta.setID(Integer.parseInt(rs.getString("ID")));
+                Puerta.setPuerta(rs.getString("Puerta"));
+                Puerta.setUbicacion(rs.getString("Ubicacion"));
+                Puerta.setIP(rs.getString("IP"));
+                Puerta.setEstado(rs.getString("Estado"));
+                Puerta.setEstado(rs.getString("Hi"));
+                Puerta.setEstado(rs.getString("Hi"));
+                Lista.add(Puerta);
             }
             rs.close();
             estatuto.close();
@@ -77,12 +80,8 @@ public class LogModelo {
                     JOptionPane.ERROR_MESSAGE);
 
         }
-        return miLista;
+        return Lista;
     }
-
-    private static class LogControl {
-
-        public LogControl() {
-        }
-    }
+    
+    
 }
