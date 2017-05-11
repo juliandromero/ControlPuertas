@@ -74,10 +74,6 @@ public class EstadosGenerales extends JFrame implements ActionListener {
 
     }
 
-    public String getNombre(String Nombre) {
-        return Nombre;
-    }
-
     private void InicializaFormulario() {
 
         Label = new JLabel("Nombre");
@@ -137,36 +133,10 @@ public class EstadosGenerales extends JFrame implements ActionListener {
 
         Boton3 = new JButton("Adicionar");
         Boton3.setBounds(500, 340, 80, 25);
-        getContentPane().add(Boton3);
-
+        Boton3.addActionListener(this);
         Boton3.setActionCommand(ADICIONAR);
         getContentPane().add(Boton3);
 
-        Boton3.addActionListener((e) -> {
-            Estado = Field4.getText();
-            IP = Field3.getText();
-            Ubicacion = Field2.getText();
-            Nombre = Field.getText();
-            coneg.setEstado(Estado);
-//            System.out.println(Estado);
-            coneg.setID_Estado(Estado);
-            coneg.setNombre(Nombre);
-//            System.out.println(Nombre);
-            coneg.setIP(IP);
-//            System.out.println(IP);
-            coneg.setUbicacion(Ubicacion);
-//            System.out.println(Ubicacion);
-
-            ConectMySql con = new ConectMySql();
-
-            try {
-                bdeg.Crear(con.conexion(), coneg);
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-                JOptionPane.showMessageDialog(this, "Ha surgido un error y no se ha podido guardar el registro.");
-            }
-
-        });
     }
 
     private void InicializaTabla() {
@@ -290,26 +260,37 @@ public class EstadosGenerales extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         String comando = e.getActionCommand();
-        if (comando == ELIMINAR) {
+        if (comando.equals(ELIMINAR)) {
             int posicion = miTabla1.getSelectedRow();
             int ID = miLista.get(posicion).getID();
             borrarLista(ID);
-            miLista = new ArrayList();
-            //InicializaTabla();
+            // Recarga la tabla despues de eliminar
             construirTabla();
-        }
+            System.out.println("Refresco tabla despues de eliminar");
+        } else if (comando.equals(ADICIONAR)) {
+            Estado = Field4.getText();
+            IP = Field3.getText();
+            Ubicacion = Field2.getText();
+            Nombre = Field.getText();
+            coneg.setEstado(Estado);
+            coneg.setID_Estado(Estado);
+            coneg.setNombre(Nombre);
+            coneg.setIP(IP);
+            coneg.setUbicacion(Ubicacion);
+
+            ConectMySql con = new ConectMySql();
+
+            try {
+                bdeg.Crear(con.conexion(), coneg);
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+                JOptionPane.showMessageDialog(this, "Ha surgido un error y no se ha podido guardar el registro.");
+            }
+            construirTabla();
+            System.out.println("Refresco tabla despues de adicionar");
+        } 
     }
 
-    public void actionPerformed2(ActionEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        String comando = e.getActionCommand();
-        if (comando == ADICIONAR) {
-
-            miLista = new ArrayList();
-            //InicializaTabla();
-            construirTabla();
-        }
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }
