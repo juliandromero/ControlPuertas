@@ -1,5 +1,5 @@
-
 package Soft_Intelligent.co.ControlPuerta.Vista;
+
 import Soft_Intelligent.co.ControlPuerta.Modelo.ConectMySql;
 import Soft_Intelligent.co.ControlPuerta.Modelo.EstadoGeneral;
 import java.awt.event.KeyAdapter;
@@ -7,7 +7,7 @@ import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
-import  javax.swing.table.DefaultTableModel; 
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import Soft_Intelligent.co.ControlPuerta.Modelo.LogModelo;
@@ -18,10 +18,11 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
-* @author luisa_suarez
+ * @author luisa_suarez
  */
-public class Log extends javax.swing.JFrame{
-        DefaultTableModel modelo;
+public class Log extends javax.swing.JFrame {
+
+    DefaultTableModel modelo;
     private TableModel dtm;
     private Object jTextFiel;
     private Object jTextFiel2;
@@ -30,7 +31,7 @@ public class Log extends javax.swing.JFrame{
     private Object jTextFiel5;
     private Object jTextFiel6;
     private Object jTextFiel7;
-    
+
     private String Puerta;
     private String IP;
     private String Hi;
@@ -39,14 +40,19 @@ public class Log extends javax.swing.JFrame{
     private String Ubicacion;
     private String Nombre;
     private String Lista;
-    
+
+    LogModeControl conex;
+
     private ArrayList<LogModeControl> List;
-    
-      
+    public Log() {
+        initComponents();
+        setLocation(350, 350);
+        setResizable(false);
+    }
     /**
      * Creates new form pprincipal
      */
-    private String[][] obtenerMatriz() {
+    private String[][] Matriz() {
 
         LogModelo EstMo = new LogModelo();
         List = EstMo.Logactividad();
@@ -54,20 +60,18 @@ public class Log extends javax.swing.JFrame{
         String matrizInfo[][] = new String[List.size()][5];
 
         for (int i = 0; i < List.size(); i++) {
-            matrizInfo[i][0] = List.get(i).getNombre()+ "";
-            matrizInfo[i][1] = List.get(i).getIP()+ "";
-            matrizInfo[i][2] = List.get(i).getHi()+ "";
-            matrizInfo[i][3] = List.get(i).getHf()+ "";
+            matrizInfo[i][0] = List.get(i).getNombre() + "";
+            matrizInfo[i][1] = List.get(i).getIP() + "";
+            matrizInfo[i][2] = List.get(i).getHi() + "";
+            matrizInfo[i][3] = List.get(i).getHf() + "";
             matrizInfo[i][4] = List.get(i).getEstado() + "";
-            matrizInfo[i][5] = List.get(i).getUbicacion()+ "";
-            matrizInfo[i][6] = List.get(i).getUsuario()+ "";
+            matrizInfo[i][5] = List.get(i).getUbicacion() + "";
+            matrizInfo[i][6] = List.get(i).getUsuario() + "";
         }
 
         return matrizInfo;
-        
-         }
 
-    
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -247,20 +251,20 @@ public class Log extends javax.swing.JFrame{
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        obtenerMatriz();
         
-          
+        
+
+        //obtenerMatriz();
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
-  
-  
+
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        int filaseleccionada= jTable1.getSelectedRow();
-        if(filaseleccionada>=0){
+        int filaseleccionada = jTable1.getSelectedRow();
+        if (filaseleccionada >= 0) {
             modelo.removeRow(filaseleccionada);
-        }
-        else{
-            JOptionPane.showMessageDialog(null,"no se selecciono ningun dato");
+        } else {
+            JOptionPane.showMessageDialog(null, "no se selecciono ningun dato");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -270,59 +274,29 @@ public class Log extends javax.swing.JFrame{
 
     private void jtxtfiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtfiltroActionPerformed
         // TODO add your handling code here:
-        
-        
-        
+
+
     }//GEN-LAST:event_jtxtfiltroActionPerformed
-TableRowSorter trs = null;
- 
+
     private void jtxtfiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtfiltroKeyTyped
         // TODO add your handling code here:
-        
-        jtxtfiltro.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyReleased(KeyEvent e) {
-                super.keyReleased(e); //To change body of generated methods, choose Tools | Templates.
-                trs.setRowFilter(RowFilter.regexFilter("(?i)"+jtxtfiltro.getText(), 0));//permite hacer el filtro sin tener en cuenta las mayusculas y minusculas
-                
-            }
-           
-        });
-           
-            
-        trs = new TableRowSorter(dtm);
-        jTable1.setRowSorter(trs);
-        
-        
+
+
     }//GEN-LAST:event_jtxtfiltroKeyTyped
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
-    
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Log.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-            
-       java.awt.EventQueue.invokeLater(new Runnable() {
+
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               }
+                new Log().setVisible(true);
+            }
         });
     }
 
@@ -344,18 +318,4 @@ TableRowSorter trs = null;
     private javax.swing.JTextField jtxtfiltro;
     // End of variables declaration//GEN-END:variables
 
-    private static class DefaultTableModelo {
-
-        private void addcolumn(String estado) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-
-        
-        
-    }
-    }
-
-    
-   
-
- 
+}
