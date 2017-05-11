@@ -5,8 +5,10 @@
  */
 package Soft_Intelligent.co.ControlPuerta.Modelo;
 
+import Soft_Intelligent.co.ControlPuerta.Vista.Log;
 import Soft_Intelligent.co.ControlPuerta.controlpuerta.EstadosGeneralesControl;
 import Soft_Intelligent.co.ControlPuerta.controlpuerta.CLog;
+import Soft_Intelligent.co.ControlPuerta.controlpuerta.LogModeControl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,12 +21,12 @@ import javax.swing.JOptionPane;
  *
  * @author luisafernanda
  */
-public class Log {
+public class LogModelo {
 
     
     private final String tabla = "Dispositivo";
 
-    public void Crear(Connection Conexion, EstadosGeneralesControl EstadoGeneral) throws SQLException {
+    public void Crear(Connection Conexion, LogModeControl Log) throws SQLException {
         try {
             PreparedStatement Guardar = null;
 
@@ -44,7 +46,7 @@ public class Log {
             throw new SQLException(e);
         }
     }
-    public ArrayList<Log> Logactividad() {
+    public ArrayList<LogModelo> Logactividad() {
 
         ConectMySql conex = new ConectMySql();
         ArrayList<Logactividad> Lista = new ArrayList<Logactividad>();
