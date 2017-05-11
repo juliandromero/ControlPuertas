@@ -35,10 +35,6 @@ public class RegistroControl {
        this.Contraseña = Contraseña;     
     }
 
-    public RegistroControl() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     public int getCedula() {
         return Cedula;
     }
