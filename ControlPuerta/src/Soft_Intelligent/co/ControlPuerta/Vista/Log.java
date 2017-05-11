@@ -1,7 +1,7 @@
 
 package Soft_Intelligent.co.ControlPuerta.Vista;
 import Soft_Intelligent.co.ControlPuerta.Modelo.ConectMySql;
-import Soft_Intelligent.co.ControlPuerta.controlpuerta.CLog;
+import Soft_Intelligent.co.ControlPuerta.Modelo.EstadoGeneral;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
@@ -10,40 +10,64 @@ import javax.swing.RowFilter;
 import  javax.swing.table.DefaultTableModel; 
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import Soft_Intelligent.co.ControlPuerta.Modelo.LogModelo;
+import Soft_Intelligent.co.ControlPuerta.controlpuerta.EstadosGeneralesControl;
+import Soft_Intelligent.co.ControlPuerta.controlpuerta.LogModeControl;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
 * @author luisa_suarez
  */
-public class Log extends javax.swing.JFrame {
+public class Log extends javax.swing.JFrame{
         DefaultTableModel modelo;
     private TableModel dtm;
+    private Object jTextFiel;
     private Object jTextFiel2;
     private Object jTextFiel3;
     private Object jTextFiel4;
     private Object jTextFiel5;
-    private Object coneg;
-    private boolean IP;
-    private boolean Hi;
-    private boolean Hf;
-    private boolean Estado;
-    private Object jTextFiel;
-        
+    private Object jTextFiel6;
+    private Object jTextFiel7;
+    
+    private String Puerta;
+    private String IP;
+    private String Hi;
+    private String Hf;
+    private String Estado;
+    private String Ubicacion;
+    private String Nombre;
+    private String Lista;
+    
+    private ArrayList<LogModeControl> List;
+    
+      
     /**
      * Creates new form pprincipal
      */
-    public Log() {
-        initComponents();
-                CLog lg = new CLog();
-        modelo= new DefaultTableModel();
-        modelo.addColumn("puerta",lg.rellenarnombre());
-        modelo.addColumn("ip",lg.rellenarip());
-        modelo.addColumn("hi",lg.rellenarHoraI());
-        modelo.addColumn("hf",lg.rellenarHoraf());
-        modelo.addColumn("estado",lg.rellenarEstado());
-        modelo.addColumn("ubicacion",lg.rellenarEstado());
-        this.jTable1.setModel(modelo);
-                
-    }
+    private String[][] obtenerMatriz() {
+
+        LogModelo EstMo = new LogModelo();
+        List = EstMo.Logactividad();
+
+        String matrizInfo[][] = new String[List.size()][5];
+
+        for (int i = 0; i < List.size(); i++) {
+            matrizInfo[i][0] = List.get(i).getNombre()+ "";
+            matrizInfo[i][1] = List.get(i).getIP()+ "";
+            matrizInfo[i][2] = List.get(i).getHi()+ "";
+            matrizInfo[i][3] = List.get(i).getHf()+ "";
+            matrizInfo[i][4] = List.get(i).getEstado() + "";
+            matrizInfo[i][5] = List.get(i).getUbicacion()+ "";
+            matrizInfo[i][6] = List.get(i).getUsuario()+ "";
+        }
+
+        return matrizInfo;
+        
+         }
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -89,13 +113,13 @@ public class Log extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Puerta", "IP", "Hora inicial", "Hora final", "Estado", "ubicacion"
+                "Puerta", "IP", "Hora inicial", "Hora final", "Estado", "ubicacion", "Nombre Usuariol"
             }
         ));
         jScrollPane2.setViewportView(jTable1);
@@ -141,9 +165,6 @@ public class Log extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(82, Short.MAX_VALUE))
-                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(281, 281, 281))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
@@ -172,7 +193,10 @@ public class Log extends javax.swing.JFrame {
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jtxtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,7 +207,7 @@ public class Log extends javax.swing.JFrame {
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jtxtfiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -215,7 +239,7 @@ public class Log extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 7, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -223,58 +247,9 @@ public class Log extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        obtenerMatriz();
         
-            Puerta = jTextFiel.getText();
-            IP = jTextFiel2.getText();
-            Hi = jTextFiel3.getText();
-            Hf = jTextFiel4.getText();
-            estado = jTextFiel5.getText();
-            ubicacion = jTextFiel5.getText();
-            coneg.setPuerta(Puerta);
-            System.out.println();
-            coneg.setIP(IP);
-            System.out.println(IP);
-            coneg.setUbicacion(Hi);
-            System.out.println(Hi);
-            coneg.setUbicacion(Hf);
-            System.out.println(Hf);
-            coneg.setID_Estado(Estado);
-            System.out.println(Estado);
-            coneg.setPuerta(Ubicacion);
-            System.out.Ubicacion();
-
-            Log bdeg = new Log();
-
-            ConectMySql con = new ConectMySql();
-
-            try {
-                bdeg.Crear(con.conexion(), coneg);
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-                JOptionPane.showMessageDialog(this, "Ha surgido un error y no se ha podido guardar el registro.");
-            }
-
-
-jTable1 = new javax.swing.JTable();
-
-jTable1.setModel(new javax.swing.table.DefaultTableModel(
-    new Object [][] {
-        {null, null, null, null, null, null},
-        {null, null, null, null, null, null},
-        {null, null, null, null, null, null},
-        {null, null, null, null, null, null}
-    },
-    new String [] {
-        "Puerta", "IP", "Hora inicial", "Hora final", "Estado", "ubicacion"
-    }
-));
-
-
-
-jScrollPane2.setViewportView(jTable1);
-     
-
-        
+          
     }//GEN-LAST:event_jButton2ActionPerformed
 
   
@@ -344,23 +319,10 @@ TableRowSorter trs = null;
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Log.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-            //</editor-fold>
-            //</editor-fold>
-            //</editor-fold>
-            //</editor-fold>
-            //</editor-fold>
-            //</editor-fold>
-            //</editor-fold>
-            //</editor-fold>
             
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new Log().setVisible(true);
+       java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+               }
         });
     }
 
@@ -391,8 +353,9 @@ TableRowSorter trs = null;
         
         
     }
-
-    
     }
 
- }
+    
+   
+
+ 
