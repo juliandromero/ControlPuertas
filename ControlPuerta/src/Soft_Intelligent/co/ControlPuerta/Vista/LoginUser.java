@@ -197,28 +197,21 @@ public class LoginUser extends javax.swing.JFrame {
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     private void ingresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresoActionPerformed
-        Registro reg = new Registro();
-        ConectMySql con = new ConectMySql();
-        try {
-            List<RegistroControl> usuarios = reg.leer(con.conexion()) ;
-            System.out.println(usuarios);
-         }catch(SQLException ex){
-            System.out.println(ex.getMessage());
-            JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
-         }
 
-        String Usuario = jTextField1.getText();
-        String Pass = jPasswordField1.getText();
         MenuDeOpciones mdo = new MenuDeOpciones();
-
-        ControlPuerta cp = new ControlPuerta();
-        cp.setUsuario(Usuario);
-        cp.setPass(Pass);
-        if (cp.ArregloLogIn()) {
-            mdo.setVisible(true);
-            dispose();
-        } else {
-            jLabel3.setText("Contrasena o Usuario Incorrecto");
+        ConectMySql con = new ConectMySql();
+        Usuario aut = new Usuario();
+        try {
+            if ((aut.autenticacion(jTextField1.getText(), con.conexion())).equals(jPasswordField1.getText())) {
+                JOptionPane.showMessageDialog(this, "Acceso Concedido");
+                mdo.setVisible(true);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Usuario O Contraseña Incorrecto");
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(this, "Usuario O Contraseña Incorrecto");
         }
     }//GEN-LAST:event_ingresoActionPerformed
 

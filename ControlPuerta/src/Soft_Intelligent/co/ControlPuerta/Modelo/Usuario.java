@@ -5,12 +5,12 @@
  */
 package Soft_Intelligent.co.ControlPuerta.Modelo;
 
-import Soft_Intelligent.co.ControlPuerta.controlpuerta.ControlPuerta;
 import Soft_Intelligent.co.ControlPuerta.controlpuerta.RegistroControl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author Programacion
  */
-public class Registro {
+public class Usuario {
 
     private final String tabla = "Usuario";
 
@@ -37,11 +37,12 @@ public class Registro {
 
             Guardar.executeUpdate();
         } catch (SQLException e) {
+            System.out.println("catch registro");
             throw new SQLException(e);
         }
     }
 
-    public List<RegistroControl> leer(Connection conexion) throws SQLException {
+    /*public List<RegistroControl> leer(Connection conexion, String Alias) throws SQLException {
 
 
         List<RegistroControl> reg = new ArrayList<>();
@@ -56,6 +57,13 @@ public class Registro {
             throw new SQLException(e);
         }
         return reg;
+    }*/
+    public String autenticacion(String Usuario, Connection conexion) throws SQLException {
+        ConectMySql conex = new ConectMySql();
+        Statement estatuto = conex.conexion().createStatement();
+        ResultSet rs = estatuto.executeQuery("SELECT contraseña FROM `usuario` WHERE alias ='?' ");
+        String contraseña = rs.getString("contraseña");
+        return contraseña;
     }
 
 }
