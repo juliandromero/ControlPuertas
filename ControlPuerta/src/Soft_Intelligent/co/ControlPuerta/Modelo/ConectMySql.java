@@ -17,7 +17,7 @@ public class ConectMySql {
     public Connection conexion() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/softintelligent", "root", "12345678");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/softintelligent", "root", "");
             System.out.println("Conexion BD Exitosa");
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println("Conexion BD Errada" + e);
