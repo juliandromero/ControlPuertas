@@ -59,11 +59,20 @@ public class Usuario {
         return reg;
     }*/
     public String autenticacion(String Usuario, Connection conexion) throws SQLException {
-        ConectMySql conex = new ConectMySql();
-        Statement estatuto = conex.conexion().createStatement();
-        ResultSet rs = estatuto.executeQuery("SELECT contraseña FROM `usuario` WHERE alias ='?' ");
-        String contraseña = rs.getString("contraseña");
-        return contraseña;
+        try {
+            ConectMySql conex = new ConectMySql();
+            Statement estatuto = conex.conexion().createStatement();
+            ResultSet rs = estatuto.executeQuery("SELECT Contraseña FROM " + this.tabla + " WHERE Alias = '" + Usuario + "'");
+            String Contraseña = null;
+            if (rs.next()) {
+                Contraseña = rs.getString("Contraseña");
+            }
+
+            return Contraseña;
+        } catch (SQLException ex) {
+            throw new SQLException(ex);
+        }
+
     }
 
 }
