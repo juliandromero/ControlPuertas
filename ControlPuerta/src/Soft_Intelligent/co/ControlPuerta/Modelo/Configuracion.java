@@ -1,10 +1,15 @@
 package Soft_Intelligent.co.ControlPuerta.Modelo;
 
 
+import Soft_Intelligent.co.ControlPuerta.controlpuerta.EstadosGeneralesControl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import Soft_Intelligent.co.ControlPuerta.controlpuerta.Modificar;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Programacion
@@ -17,7 +22,7 @@ public class Configuracion {
             PreparedStatement Guardar = null;
             
             
-            if (null == mod.getIdAlarma()) {
+            if (0 == mod.getIdAlarma()) {
 
                 Guardar = Conexion.prepareStatement("INSERT INTO " + this.tabla +"(Nombre, HoraIni, HoraFin, CantidadApertura, Lunes, Martes, Miercoles, Jueves, Viernes, Sabado, Domingo) VALUES(?,?,?,?,?,?,?,?,?,?,?)");
              //   Guardar.setString(1, );
@@ -41,6 +46,45 @@ public class Configuracion {
 
             throw new SQLException(e);
         }
+    }
+     
+     public ArrayList<Modificar> BuscaAl() {
+
+        ConectMySql conex = new ConectMySql();
+            ArrayList<Modificar> myList = new ArrayList<Modificar>();
+        Modificar alarma;
+        try {
+
+            Statement estatuto = conex.conexion().createStatement();
+            ResultSet rs = estatuto.executeQuery("SELECT * FROM Alarma *");
+
+            while (rs.next()) {
+                alarma = new Modificar();
+                alarma.setIdAlarma(rs.getInt("ID"));
+                alarma.setNombrePuerta(rs.getString("Nombre"));
+                alarma.setHora1(rs.getString("HoraIni"));
+                alarma.setHora2(rs.getString("HoraFin"));
+                alarma.setLun(rs.getBoolean("Lunes"));
+                alarma.setMar(rs.getBoolean("Martes"));
+                alarma.setMie(rs.getBoolean("Miercoles"));
+                alarma.setJue(rs.getBoolean("Jueves"));
+                alarma.setVie(rs.getBoolean("Viernes"));
+                alarma.setSab(rs.getBoolean("Sabado"));
+                alarma.setDom(rs.getBoolean("Domingo"));
+                
+                myList.add(alarma);
+            }
+            rs.close();
+            estatuto.close();
+            conex.desconectar();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al consultar", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+
+        }
+        return myList;
     }
      
 }

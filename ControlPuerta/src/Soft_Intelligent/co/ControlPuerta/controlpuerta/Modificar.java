@@ -1,8 +1,6 @@
 package Soft_Intelligent.co.ControlPuerta.controlpuerta;
 
 import Soft_Intelligent.co.ControlPuerta.Vista.*;
-import static Soft_Intelligent.co.ControlPuerta.Vista.ModificarPuerta.txtcantidadApertura;
-import static Soft_Intelligent.co.ControlPuerta.Vista.ModificarPuerta.txtnombrePuerta;
 import javax.swing.JOptionPane;
 
 /**
@@ -10,8 +8,9 @@ import javax.swing.JOptionPane;
  * @author SANCHEZ-SOSA
  */
 public class Modificar {
+    private int IdAlarma;
     private boolean lun, mar, mie, jue, vie, sab, dom;
-    private final Integer IdAlarma;
+    
     private  String nombrePuerta="";
     private  int ipPuerta=0, cantidadApertura;
     private  String hora1 , hora2;
@@ -35,7 +34,7 @@ public class Modificar {
         this.vie = false;
         this.sab = false;
         this.dom = false;
-        this.IdAlarma = null;
+        this.IdAlarma = 0;
     }
 
     public boolean isLun() {
@@ -94,10 +93,14 @@ public class Modificar {
         this.dom = dom;
     }
 
-    public Integer getIdAlarma() {
+    public int getIdAlarma() {
         return IdAlarma;
     }
 
+    public void setIdAlarma(int IdAlarma) {
+        this.IdAlarma = IdAlarma;
+    }
+    
     public String getNombrePuerta() {
         return nombrePuerta;
     }
@@ -137,6 +140,7 @@ public class Modificar {
     public void setHora2(String hora2) {
         this.hora2 = hora2;
     }
+    
     
     } 
     
