@@ -18,6 +18,8 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import Soft_Intelligent.co.ControlPuerta.Modelo.ConectMySql;
 import Soft_Intelligent.co.ControlPuerta.Modelo.EstadoGeneral;
+import Soft_Intelligent.co.ControlPuerta.Modelo.LogModelo;
+import static Soft_Intelligent.co.ControlPuerta.Vista.EstadosGenerales.ELIMINAR;
 import Soft_Intelligent.co.ControlPuerta.controlpuerta.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -55,10 +57,7 @@ public class Logi extends JFrame implements ActionListener {
 
     private ArrayList<LogModeControl> miLista;
     
-    public static String ELIMINAR = "ELIMINAR";
-    public static String ADICIONAR = "ADICIONAR";
-
-    EstadoGeneral bdeg;
+      LogModelo bdeg;
 
     public Logi() {
         setSize(800, 400);
@@ -74,7 +73,7 @@ public class Logi extends JFrame implements ActionListener {
         InicializaBotones();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        bdeg = new EstadoGeneral();
+        bdeg = new LogModelo();
 
     }
     
@@ -140,6 +139,66 @@ public class Logi extends JFrame implements ActionListener {
 
     }
     
+    private void InicializaBotones() {
+
+        Boton1 = new JButton("Eliminar");
+        Boton1.setBounds(600, 340, 80, 25);
+        Boton1.addActionListener(this);
+        Boton1.setActionCommand(ELIMINAR);
+        getContentPane().add(Boton1);
+
+        Boton2 = new JButton("Atras");
+        Boton2.setBounds(700, 340, 80, 25);
+        getContentPane().add(Boton2);
+        Boton2.addActionListener((e) -> {
+
+            MenuDeOpciones mdo = new MenuDeOpciones();
+            mdo.setVisible(true);
+            dispose();
+
+        });
+        
+        private void InicializaTabla() {
+        getContentPane().setLayout(null);
+
+        labelTitulo = new JLabel();
+        labelTitulo.setBounds(200, 11, 400, 30);
+        labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+        labelTitulo.setText("Loging");
+        labelTitulo.setFont(new java.awt.Font("Verdana", 1, 18));
+        getContentPane().add(labelTitulo);
+        
+        
+         
+        private void construirTabla() {
+        String titulos[] = {"Puerta", "IP", "Hora Inicial", "Hora Final", "Estado", "Ubicacion", "Nombre"};
+        String informacion[][] = obtenerMatriz();
+
+        miTabla1 = new JTable(informacion, titulos);
+        mibarra1.setViewportView(miTabla1);
+        }
+        
+         private String[][] obtenerMatriz() {
+
+        LogModelo EstGen = new LogModelo();
+        miLista = EstGen.Logactividad();
+
+        String matrizInfo[][] = new String[miLista.size()][5];
+
+        for (int i = 0; i < miLista.size(); i++) {
+            matrizInfo[i][0] = miLista.get(i).getID() + "";
+            matrizInfo[i][1] = miLista.get(i).getPuerta() + "";
+            matrizInfo[i][2] = miLista.get(i).getIP() + "";
+            matrizInfo[i][3] = miLista.get(i).getHi() + "";
+            matrizInfo[i][4] = miLista.get(i).getHf() + "";
+            matrizInfo[i][5] = miLista.get(i).getEstado() + "";
+            matrizInfo[i][6] = miLista.get(i).getUbicacion() + "";
+            matrizInfo[i][7] = miLista.get(i).getNombre() + "";
+        }
+
+        return matrizInfo;
+    }
+
     
 
     
@@ -165,25 +224,62 @@ public class Logi extends JFrame implements ActionListener {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(EstadosGenerales.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(EstadosGenerales.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(EstadosGenerales.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(EstadosGenerales.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(() -> {
+            new LogModelo().setVisible(true);
+        });
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ConectMySql con = new ConectMySql();
+    
+            try {
+                bdeg.Crear(con.conexion(), coneg);          
+            }   catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+                JOptionPane.showMessageDialog(this, "Ha surgido un error y no se ha podido guardar el registro.");
+            }
     }
+        
 
     
-    private void InicializaTabla() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void construirTabla() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void InicializaBotones() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }
