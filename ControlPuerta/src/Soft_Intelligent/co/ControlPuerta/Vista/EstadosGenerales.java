@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
 /**
@@ -38,7 +39,8 @@ public class EstadosGenerales extends JFrame implements ActionListener {
     JTextField Field;
     JTextField Field2;
     JTextField Field3;
-    JTextField Field4;
+//    JTextField Field4;
+    private JComboBox ComboBox1;
     JLabel Label;
     JButton Boton1;
     JButton Boton2;
@@ -104,9 +106,14 @@ public class EstadosGenerales extends JFrame implements ActionListener {
         Label.setBounds(380, 110, 230, 30);
         getContentPane().add(Label);
 
-        Field4 = new JTextField();
-        Field4.setBounds(453, 110, 230, 30);
-        getContentPane().add(Field4);
+//        Field4 = new JTextField();
+//        Field4.setBounds(453, 110, 230, 30);
+//        getContentPane().add(Field4);
+        
+        ComboBox1 = new JComboBox();
+        ComboBox1.setBounds(453, 110, 230, 30);
+        ComboBox1.addItem("Seleccion");
+        getContentPane().add(ComboBox1);
 
         coneg = new EstadosGeneralesControl();
 
@@ -247,6 +254,7 @@ public class EstadosGenerales extends JFrame implements ActionListener {
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -268,7 +276,7 @@ public class EstadosGenerales extends JFrame implements ActionListener {
             construirTabla();
             System.out.println("Refresco tabla despues de eliminar");
         } else if (comando.equals(ADICIONAR)) {
-            Estado = Field4.getText();
+        //    Estado = ComboBox1.getName();
             IP = Field3.getText();
             Ubicacion = Field2.getText();
             Nombre = Field.getText();
@@ -281,7 +289,7 @@ public class EstadosGenerales extends JFrame implements ActionListener {
             ConectMySql con = new ConectMySql();
 
             try {
-                bdeg.Crear(con.conexion(), coneg);
+                bdeg.CrearDisp(con.conexion(), coneg);
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
                 JOptionPane.showMessageDialog(this, "Ha surgido un error y no se ha podido guardar el registro.");
