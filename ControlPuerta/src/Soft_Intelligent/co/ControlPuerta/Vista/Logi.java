@@ -54,6 +54,7 @@ public class Logi extends JFrame implements ActionListener {
     String Ubicacion;
     String IP;
     LogModeControl coneg;
+    
 
     private ArrayList<LogModeControl> miLista;
     
@@ -156,9 +157,10 @@ public class Logi extends JFrame implements ActionListener {
             mdo.setVisible(true);
             dispose();
 
-        });
+    });
+    }
         
-        private void InicializaTabla() {
+    private void InicializaTabla() {
         getContentPane().setLayout(null);
 
         labelTitulo = new JLabel();
@@ -167,7 +169,7 @@ public class Logi extends JFrame implements ActionListener {
         labelTitulo.setText("Loging");
         labelTitulo.setFont(new java.awt.Font("Verdana", 1, 18));
         getContentPane().add(labelTitulo);
-        
+    }
         
          
         private void construirTabla() {
