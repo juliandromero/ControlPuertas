@@ -1,4 +1,4 @@
-/*//GEN-LINE:variables
+/*                    
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -299,7 +299,7 @@ public class EstadosGenerales extends JFrame implements ActionListener {
         } 
     }
 
-<<<<<<< HEAD
+
     public void actionPerformed2(ActionEvent e) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         String comando = e.getActionCommand();
@@ -312,8 +312,8 @@ public class EstadosGenerales extends JFrame implements ActionListener {
     }
     // Variables declaration - do not modify                     
     // End of variables declaration                   
-=======
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
->>>>>>> origin/master
+
 }
