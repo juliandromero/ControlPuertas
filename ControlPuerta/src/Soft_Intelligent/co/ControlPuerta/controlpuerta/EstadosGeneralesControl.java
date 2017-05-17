@@ -15,6 +15,9 @@ public class EstadosGeneralesControl {
     private String Nombre;
     private String Ubicacion;
     private String IP;
+    private String Hi;
+    private String Hf;
+    private String Usuario;
     private String Estado;
     private int ID_Estado;
 
@@ -32,6 +35,18 @@ public class EstadosGeneralesControl {
 
     public String getIP() {
         return IP;
+    }
+    
+    public String getHi() {
+        return Hi;
+    }
+    
+    public String getHf() {
+        return Hf;
+    }
+    
+    public String getUsuario() {
+        return Usuario;
     }
 
     public String getEstado() {
@@ -73,5 +88,16 @@ public class EstadosGeneralesControl {
     public void setEstado(String Estado) {
         this.Estado = Estado;
     }
+    
+    public void setHi(String Hi) {
+        this.Hi = Hi;
+    }
+    
+    public void setHf(String Hf) {
+        this.Hi = Hf;
+    }
 
+    public void setUsuario(String Usuario) {
+        this.Usuario = Usuario;
+    }
 }
