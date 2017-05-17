@@ -10,12 +10,13 @@ package Soft_Intelligent.co.ControlPuerta.Vista;
  * @author Programacion
  */
 import Soft_Intelligent.co.ControlPuerta.Modelo.ConectMySql;
-import Soft_Intelligent.co.ControlPuerta.Modelo.Registro;
+import Soft_Intelligent.co.ControlPuerta.Modelo.Usuario;
 import Soft_Intelligent.co.ControlPuerta.controlpuerta.*;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+
 public class Registrar extends javax.swing.JFrame {
 
     /**
@@ -180,41 +181,34 @@ public class Registrar extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
+
         LoginUser login = new LoginUser();
         login.setVisible(true);
         dispose();
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             // TODO add your handling code here:
-            Registro bdreg = new Registro();
-            RegistroControl reg = new RegistroControl();
-            ConectMySql con = new ConectMySql();
+            Usuario bdreg = new Usuario();
             int ced = Integer.parseInt(jTextField1.getText());
             int tel = Integer.parseInt(jTextField4.getText());
-            reg.setCedula(ced);
-            reg.setTelefono(tel);
-            reg.setNombre(jTextField2.getText());
-            reg.setApellido(jTextField3.getText());
-            reg.setEmail(jTextField5.getText());
-            reg.setAlias(jTextField6.getText());
-            reg.setContraseña(jPasswordField1.getText());
-            
+            RegistroControl reg = new RegistroControl(ced,jTextField2.getText(),jTextField3.getText(),tel,jTextField5.getText(),jTextField6.getText(),jPasswordField1.getText());
+            ConectMySql con = new ConectMySql();
+
             bdreg.Crear(con.conexion(), reg);
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             JOptionPane.showMessageDialog(this, "Ha surgido un error y no se ha podido guardar el registro.");
         }
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
-        
-        
+
+
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed

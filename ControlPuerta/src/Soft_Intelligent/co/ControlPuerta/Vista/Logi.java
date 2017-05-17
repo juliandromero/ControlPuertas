@@ -1,10 +1,14 @@
-/*//GEN-LINE:variables
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package Soft_Intelligent.co.ControlPuerta.Vista;
 
+/**
+ *
+ * @author luisafernanda
+ */
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,6 +18,8 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import Soft_Intelligent.co.ControlPuerta.Modelo.ConectMySql;
 import Soft_Intelligent.co.ControlPuerta.Modelo.EstadoGeneral;
+import Soft_Intelligent.co.ControlPuerta.Modelo.LogModelo;
+import static Soft_Intelligent.co.ControlPuerta.Vista.EstadosGenerales.ELIMINAR;
 import Soft_Intelligent.co.ControlPuerta.controlpuerta.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,23 +30,21 @@ import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
-/**
- *
- * @author Programacion
- */
-public class EstadosGenerales extends JFrame implements ActionListener {
+public class Logi extends JFrame implements ActionListener {
 
+    /**
+     * Creates new form Logi
+     */
+    
     private JLabel labelTitulo;
     JTable miTabla1;
     JScrollPane mibarra1;
     JTextField Field;
     JTextField Field2;
     JTextField Field3;
-//    JTextField Field4;
-    private JComboBox ComboBox1;
+    JTextField Field4;
     JLabel Label;
     JButton Boton1;
     JButton Boton2;
@@ -49,18 +53,16 @@ public class EstadosGenerales extends JFrame implements ActionListener {
     String Nombre;
     String Ubicacion;
     String IP;
-    EstadosGeneralesControl coneg;
+    LogModeControl coneg;
+    
 
-    private ArrayList<EstadosGeneralesControl> miLista;
+    private ArrayList<LogModeControl> miLista;
+    
+      LogModelo bdeg;
 
-    public static String ELIMINAR = "ELIMINAR";
-    public static String ADICIONAR = "ADICIONAR";
-
-    EstadoGeneral bdeg;
-
-    public EstadosGenerales() {
+    public Logi() {
         setSize(800, 400);
-        setTitle("Puerta : Estados Generales");
+        setTitle("Puerta : Login");
         setLocationRelativeTo(null);
         setResizable(false);
 
@@ -72,13 +74,13 @@ public class EstadosGenerales extends JFrame implements ActionListener {
         InicializaBotones();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        bdeg = new EstadoGeneral();
+        bdeg = new LogModelo();
 
     }
-
+    
     private void InicializaFormulario() {
 
-        Label = new JLabel("Nombre");
+        Label = new JLabel("Puerta");
         Label.setBounds(27, 70, 230, 30);
         getContentPane().add(Label);
 
@@ -86,7 +88,7 @@ public class EstadosGenerales extends JFrame implements ActionListener {
         Field.setBounds(100, 70, 230, 30);
         getContentPane().add(Field);
 
-        Label = new JLabel("Ubicacion");
+        Label = new JLabel("IP");
         Label.setBounds(27, 110, 230, 30);
         getContentPane().add(Label);
 
@@ -94,7 +96,7 @@ public class EstadosGenerales extends JFrame implements ActionListener {
         Field2.setBounds(100, 110, 230, 30);
         getContentPane().add(Field2);
 
-        Label = new JLabel("IP");
+        Label = new JLabel("Hora Inicial");
         Label.setBounds(380, 70, 230, 30);
         getContentPane().add(Label);
 
@@ -102,23 +104,42 @@ public class EstadosGenerales extends JFrame implements ActionListener {
         Field3.setBounds(453, 70, 230, 30);
         getContentPane().add(Field3);
 
+        Label = new JLabel("Hora Final");
+        Label.setBounds(380, 110, 230, 30);
+        getContentPane().add(Label);
+
+        Field4 = new JTextField();
+        Field4.setBounds(453, 110, 230, 30);
+        getContentPane().add(Field4);
+        
         Label = new JLabel("Estado");
         Label.setBounds(380, 110, 230, 30);
         getContentPane().add(Label);
 
-//        Field4 = new JTextField();
-//        Field4.setBounds(453, 110, 230, 30);
-//        getContentPane().add(Field4);
+        Field4 = new JTextField();
+        Field4.setBounds(453, 110, 230, 30);
+        getContentPane().add(Field4);
         
-        ComboBox1 = new JComboBox();
-        ComboBox1.setBounds(453, 110, 230, 30);
-        ComboBox1.addItem("Seleccion");
-        getContentPane().add(ComboBox1);
+        Label = new JLabel("Ubicacion");
+        Label.setBounds(380, 110, 230, 30);
+        getContentPane().add(Label);
 
-        coneg = new EstadosGeneralesControl();
+        Field4 = new JTextField();
+        Field4.setBounds(453, 110, 230, 30);
+        getContentPane().add(Field4);
+        
+        Label = new JLabel("Nombre de Usuario");
+        Label.setBounds(380, 110, 230, 30);
+        getContentPane().add(Label);
+
+        Field4 = new JTextField();
+        Field4.setBounds(453, 110, 230, 30);
+        getContentPane().add(Field4);
+
+        coneg = new LogModeControl();
 
     }
-
+    
     private void InicializaBotones() {
 
         Boton1 = new JButton("Eliminar");
@@ -136,64 +157,53 @@ public class EstadosGenerales extends JFrame implements ActionListener {
             mdo.setVisible(true);
             dispose();
 
-        });
-
-        Boton3 = new JButton("Adicionar");
-        Boton3.setBounds(500, 340, 80, 25);
-        Boton3.addActionListener(this);
-        Boton3.setActionCommand(ADICIONAR);
-        getContentPane().add(Boton3);
-
+    });
     }
-
+        
     private void InicializaTabla() {
         getContentPane().setLayout(null);
 
         labelTitulo = new JLabel();
         labelTitulo.setBounds(200, 11, 400, 30);
         labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-        labelTitulo.setText("Configurar Dispositivos");
+        labelTitulo.setText("Loging");
         labelTitulo.setFont(new java.awt.Font("Verdana", 1, 18));
         getContentPane().add(labelTitulo);
-
-        mibarra1 = new JScrollPane();
-        mibarra1.setBounds(35, 200, 700, 130);
-        getContentPane().add(mibarra1);
-
     }
-
-    private void construirTabla() {
-        String titulos[] = {"ID", "Nombre", "Ubicacion", "IP", "Estado"};
+        
+         
+        private void construirTabla() {
+        String titulos[] = {"Puerta", "IP", "Hora Inicial", "Hora Final", "Estado", "Ubicacion", "Nombre"};
         String informacion[][] = obtenerMatriz();
 
         miTabla1 = new JTable(informacion, titulos);
         mibarra1.setViewportView(miTabla1);
+        }
+        
+         private String[][] obtenerMatriz() {
 
-    }
-
-    private String[][] obtenerMatriz() {
-
-        EstadoGeneral EstGen = new EstadoGeneral();
-        miLista = EstGen.BuscaDisp();
+        LogModelo EstGen = new LogModelo();
+        miLista = EstGen.Logactividad();
 
         String matrizInfo[][] = new String[miLista.size()][5];
 
         for (int i = 0; i < miLista.size(); i++) {
             matrizInfo[i][0] = miLista.get(i).getID() + "";
-            matrizInfo[i][1] = miLista.get(i).getNombre() + "";
-            matrizInfo[i][2] = miLista.get(i).getUbicacion() + "";
-            matrizInfo[i][3] = miLista.get(i).getIP() + "";
-            matrizInfo[i][4] = miLista.get(i).getEstado() + "";
+            matrizInfo[i][1] = miLista.get(i).getPuerta() + "";
+            matrizInfo[i][2] = miLista.get(i).getIP() + "";
+            matrizInfo[i][3] = miLista.get(i).getHi() + "";
+            matrizInfo[i][4] = miLista.get(i).getHf() + "";
+            matrizInfo[i][5] = miLista.get(i).getEstado() + "";
+            matrizInfo[i][6] = miLista.get(i).getUbicacion() + "";
+            matrizInfo[i][7] = miLista.get(i).getNombre() + "";
         }
 
         return matrizInfo;
     }
 
-    public void borrarLista(int ID) {
-        //miLista.clear();
-        bdeg.eliminarDisp(ID);
+    
 
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -201,24 +211,20 @@ public class EstadosGenerales extends JFrame implements ActionListener {
      * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 632, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 289, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
-
-        pack();
-    }// </editor-fold>                        
+    }// </editor-fold>//GEN-END:initComponents
 
     /**
      * @param args the command line arguments
@@ -254,66 +260,28 @@ public class EstadosGenerales extends JFrame implements ActionListener {
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new EstadosGenerales().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new LogModelo().setVisible(true);
         });
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        String comando = e.getActionCommand();
-        if (comando.equals(ELIMINAR)) {
-            int posicion = miTabla1.getSelectedRow();
-            int ID = miLista.get(posicion).getID();
-            borrarLista(ID);
-            // Recarga la tabla despues de eliminar
-            construirTabla();
-            System.out.println("Refresco tabla despues de eliminar");
-        } else if (comando.equals(ADICIONAR)) {
-        //    Estado = ComboBox1.getName();
-            IP = Field3.getText();
-            Ubicacion = Field2.getText();
-            Nombre = Field.getText();
-            coneg.setEstado(Estado);
-            coneg.setID_Estado(Estado);
-            coneg.setNombre(Nombre);
-            coneg.setIP(IP);
-            coneg.setUbicacion(Ubicacion);
-
-            ConectMySql con = new ConectMySql();
-
+        ConectMySql con = new ConectMySql();
+    
             try {
-                bdeg.CrearDisp(con.conexion(), coneg);
-            } catch (SQLException ex) {
+                bdeg.Crear(con.conexion(), coneg);          
+            }   catch (SQLException ex) {
                 System.out.println(ex.getMessage());
                 JOptionPane.showMessageDialog(this, "Ha surgido un error y no se ha podido guardar el registro.");
             }
-            construirTabla();
-            System.out.println("Refresco tabla despues de adicionar");
-        } 
     }
+        
 
-<<<<<<< HEAD
-    public void actionPerformed2(ActionEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        String comando = e.getActionCommand();
-        if (comando == ADICIONAR) {
-
-            miLista = new ArrayList();
-            //InicializaTabla();
-            construirTabla();
-        }
-    }
-    // Variables declaration - do not modify                     
-    // End of variables declaration                   
-=======
+    
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
->>>>>>> origin/master
 }

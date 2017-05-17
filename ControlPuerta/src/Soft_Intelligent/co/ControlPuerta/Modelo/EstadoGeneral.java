@@ -24,7 +24,7 @@ public class EstadoGeneral {
 
     private final String tabla = "Dispositivo";
 
-    public void Crear(Connection Conexion, EstadosGeneralesControl EstadoGeneral) throws SQLException {
+    public void CrearDisp(Connection Conexion, EstadosGeneralesControl EstadoGeneral) throws SQLException {
         try {
             PreparedStatement Guardar = null;
             System.out.println("INSERT INTO " + this.tabla + "( Nombre, Ubicacion, IP,ID_Estado) VALUES(?,?,?,?)");
@@ -41,19 +41,6 @@ public class EstadoGeneral {
             throw new SQLException(e);
         }
     }
-//    public void Eliminar(Connection Conexion, EstadosGeneralesControl EstadoGeneral) throws SQLException {
-//        try {
-//            PreparedStatement Insert = null;
-//
-//            Insert = Conexion.prepareStatement("Delete " + this.tabla + "Where ID =? )");
-//            Insert.setInt(1, EstadoGeneral.getID_Estado());
-//
-//            Insert.executeUpdate();
-//
-//        } catch (SQLException e) {
-//            throw new SQLException(e);
-//        }
-//    }
 
     public void eliminarDisp(int ID) {
         ConectMySql conex = new ConectMySql();

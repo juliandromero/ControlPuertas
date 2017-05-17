@@ -1,18 +1,29 @@
 package Soft_Intelligent.co.ControlPuerta.Vista;
 
+import Soft_Intelligent.co.ControlPuerta.Modelo.ConectMySql;
 import Soft_Intelligent.co.ControlPuerta.Modelo.Configuracion;
+import Soft_Intelligent.co.ControlPuerta.Modelo.EstadoGeneral;
 import Soft_Intelligent.co.ControlPuerta.controlpuerta.*;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 import javax.swing.table.DefaultTableModel;
 
-// @author Julian Sanchez
+// @author SANCHEZ-SOSA
 public class ModificarPuerta extends javax.swing.JFrame {
 
-    DefaultTableModel table;
+    DefaultTableModel table = new DefaultTableModel();
+    public static String a;
+    public static String b;
+    private ArrayList<EstadosGeneralesControl> myList;
 
     //constructor de la clase  
     public ModificarPuerta() {
@@ -21,12 +32,14 @@ public class ModificarPuerta extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Modificar Puerta");
-        //
-        table = new DefaultTableModel();
+        
+        myList = new ArrayList();
+        
+        /*table = new DefaultTableModel();
         table.addColumn("Nombre");
         table.addColumn("Ip");
         table.addColumn("Estado");
-        this.jTable2.setModel(table);
+        this.jTable2.setModel(table);*/
 
     }
 
@@ -173,11 +186,6 @@ public class ModificarPuerta extends javax.swing.JFrame {
         jLabel13.setText("Repetir:");
 
         checkdom.setText("DOM");
-        checkdom.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkdomActionPerformed(evt);
-            }
-        });
 
         checkmar.setText("MAR");
 
@@ -198,9 +206,7 @@ public class ModificarPuerta extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addGap(302, 302, 302))
+                    .addComponent(jLabel13)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addComponent(checkdom)
@@ -346,23 +352,18 @@ public class ModificarPuerta extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtoncerrarActionPerformed
     Ajustes x = new Ajustes();
-    private void jButtonaplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonaplicarActionPerformed
-
-        String[] primera = new String[3];
-        primera[0] = txtnombrePuerta.getText();
-        primera[1] = txtipPuerta.getText();
-        primera[2] = jToggleButton1.getText();
-        table.addRow(primera);
-        modificar.aplicar();
+    public void jButtonaplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonaplicarActionPerformed
+               
         Modificar mod = new Modificar();
-
-        Object data[] = {Modificar.nombrePuerta, Modificar.ipPuerta, jToggleButton1};
-        x.tabla.addRow(data);
+        Configuracion config = new Configuracion();
+        ConectMySql con = new ConectMySql();
         
-        String a = jSpinner1.getValue().toString().substring(11,16); // asi captura el dato del spinner en un string
+        
+        a = jSpinner1.getValue().toString().substring(11,16); // asi captura el dato del spinner en un string
+        b = jSpinner2.getValue().toString().substring(11,16);
         System.out.println(a);
         
-        
+        int cant=Integer.parseInt(txtcantidadApertura.getText());
         mod.setDom(checkdom.isSelected());
         mod.setLun(checklun.isSelected());
         mod.setMar(checkmar.isSelected());
@@ -370,19 +371,48 @@ public class ModificarPuerta extends javax.swing.JFrame {
         mod.setJue(checkjue.isSelected());
         mod.setVie(checkvie.isSelected());
         mod.setSab(checksab.isSelected());
+        mod.setNombrePuerta(txtnombrePuerta.getText());
+        mod.setCantidadApertura(cant);
+        mod.setHora1(a);
+        mod.setHora2(b);
+
+        try {
+            config.guardarSemana(con.conexion(), mod);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+         }   
+       
     }//GEN-LAST:event_jButtonaplicarActionPerformed
 
+       // private ArrayList<Modificar> myList;
+
+    
+     private String[][] obtenerMatriz2() {
+
+        Configuracion config = new Configuracion();
+        myList = config.BuscaAl();
+
+        String matrizInfo[][] = new String[myList.size()][3];
+
+        for (int i = 0; i < myList.size(); i++) {
+            matrizInfo[i][0] = myList.get(i).getIdAlarma() + "";
+            matrizInfo[i][1] = myList.get(i).getNombrePuerta() + "";
+           
+            
+        }
+
+        return matrizInfo;
+    }
+    
+    
+    
+    
     private void jButtonatrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonatrasActionPerformed
         Ajustes obj = new Ajustes();
         obj.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButtonatrasActionPerformed
-
-    private void checkdomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkdomActionPerformed
-        // TODO add your handling code here:
-        
-        
-    }//GEN-LAST:event_checkdomActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -427,7 +457,7 @@ public class ModificarPuerta extends javax.swing.JFrame {
     public static javax.swing.JCheckBox checkmie;
     public static javax.swing.JCheckBox checksab;
     public static javax.swing.JCheckBox checkvie;
-    private javax.swing.JButton jButtonaplicar;
+    public javax.swing.JButton jButtonaplicar;
     private javax.swing.JButton jButtonatras;
     private javax.swing.JButton jButtoncerrar;
     private javax.swing.JLabel jLabel1;

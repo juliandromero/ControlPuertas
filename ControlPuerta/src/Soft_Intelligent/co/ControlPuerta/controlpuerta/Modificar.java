@@ -5,11 +5,15 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Julian Sanchez
+ * @author SANCHEZ-SOSA
  */
 public class Modificar {
+    private int IdAlarma;
     private boolean lun, mar, mie, jue, vie, sab, dom;
-    private final Integer IdAlarma;
+    
+    private  String nombrePuerta="";
+    private  int ipPuerta=0, cantidadApertura;
+    private  String hora1 , hora2;
 
     public Modificar(boolean lun, boolean mar, boolean mie, boolean jue, boolean vie, boolean sab, boolean dom, Integer IdAlarma) {
         this.lun = lun;
@@ -30,7 +34,7 @@ public class Modificar {
         this.vie = false;
         this.sab = false;
         this.dom = false;
-        this.IdAlarma = null;
+        this.IdAlarma = 0;
     }
 
     public boolean isLun() {
@@ -89,32 +93,58 @@ public class Modificar {
         this.dom = dom;
     }
 
-    public Integer getIdAlarma() {
+    public int getIdAlarma() {
         return IdAlarma;
+    }
+
+    public void setIdAlarma(int IdAlarma) {
+        this.IdAlarma = IdAlarma;
+    }
+    
+    public String getNombrePuerta() {
+        return nombrePuerta;
+    }
+
+    public int getIpPuerta() {
+        return ipPuerta;
+    }
+
+    public int getCantidadApertura() {
+        return cantidadApertura;
+    }
+
+    public String getHora1() {
+        return hora1;
+    }
+
+    public String getHora2() {
+        return hora2;
+    }
+
+    public void setNombrePuerta(String nombrePuerta) {
+        this.nombrePuerta = nombrePuerta;
+    }
+
+    public void setIpPuerta(int ipPuerta) {
+        this.ipPuerta = ipPuerta;
+    }
+
+    public void setCantidadApertura(int cantidadApertura) {
+        this.cantidadApertura = cantidadApertura;
+    }
+
+    public void setHora1(String hora1) {
+        this.hora1 = hora1;
+    }
+
+    public void setHora2(String hora2) {
+        this.hora2 = hora2;
     }
     
     
-    
-
-    public static String nombrePuerta="";
-    public static int ipPuerta=0, cantidadApertura/*, hora1, hora2*/;
-    
-   
-    
-    
-    public void aplicar(){
-    nombrePuerta=ModificarPuerta.txtnombrePuerta.getText();
-//    cantidadApertura=Integer.parseInt(ModificarPuerta.txtcantidadApertura.getText());
-    //hora1=ModificarPuerta.de.getText();
-    //ipPuerta=
-    
-    
-    
-    JOptionPane.showMessageDialog(null,cantidadApertura+ " " + nombrePuerta+" ", " mensaje ", JOptionPane.PLAIN_MESSAGE);
-           
     } 
     
 
     
-}
+
     

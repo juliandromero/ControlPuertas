@@ -1,6 +1,8 @@
 package Soft_Intelligent.co.ControlPuerta.Vista;
 
+import Soft_Intelligent.co.ControlPuerta.Modelo.Configuracion;
 import Soft_Intelligent.co.ControlPuerta.controlpuerta.*;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -10,7 +12,11 @@ import javax.swing.table.DefaultTableModel;
 public class Ajustes extends javax.swing.JFrame {
 
     DefaultTableModel tabla;
-
+    public static String ELIMINAR = "ELIMINAR";
+    private ArrayList<Modificar> myList;
+    Configuracion con;
+    Modificar modificar = new Modificar();
+    
     //constructor de la clase 
     public Ajustes() {
         initComponents();
@@ -20,14 +26,20 @@ public class Ajustes extends javax.swing.JFrame {
         setTitle("Modificar Puerta");
         //Propiedades de la tabla
         tabla = new DefaultTableModel();
-        tabla.addColumn("Nombre");
         tabla.addColumn("Ip");
-        tabla.addColumn("Estado");
+        tabla.addColumn("Nombre");
+        tabla.addColumn("Hora Inicio");
+        tabla.addColumn("Hora Fin");
+        tabla.addColumn("Lunes");
+        tabla.addColumn("Martes");
+        tabla.addColumn("Miercoles");
+        tabla.addColumn("Jueves");
+        tabla.addColumn("Viernes");
+        tabla.addColumn("Sabado");
+        tabla.addColumn("Domingo");
         this.jTable1.setModel(tabla);
 
     }
-    Modificar modificar = new Modificar();
-    //ModificarPuerta mp = new ModificarPuerta();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -40,8 +52,9 @@ public class Ajustes extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        config = new javax.swing.JButton();
+        jButtonConfig = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButtonEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,17 +69,19 @@ public class Ajustes extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        config.setText("Configurar");
-        config.addActionListener(new java.awt.event.ActionListener() {
+        jButtonConfig.setText("Configurar");
+        jButtonConfig.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                configActionPerformed(evt);
+                jButtonConfigActionPerformed(evt);
             }
         });
 
         jButton1.setText("Atras");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+
+        jButtonEliminar.setText("Eliminar");
+        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonEliminarActionPerformed(evt);
             }
         });
 
@@ -75,28 +90,30 @@ public class Ajustes extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(324, 324, 324)
-                        .addComponent(config)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+                        .addComponent(jButton1)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 888, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButtonEliminar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonConfig)))
+                        .addGap(18, 18, 18))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(config)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonConfig)
+                    .addComponent(jButtonEliminar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -104,17 +121,24 @@ public class Ajustes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void configActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configActionPerformed
+    private void jButtonConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfigActionPerformed
         ModificarPuerta obj = new ModificarPuerta();
         obj.setVisible(true);
 
-    }//GEN-LAST:event_configActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        /*MenuDeOpciones obj = new MenuDeOpciones();
-    obj.setVisible(true);
-    dispose();*/
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonConfigActionPerformed
+
+    public void borrarAl(int ID) {
+        con.eliminarAl(ID);
+    }
+    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
+        String comando = evt.getActionCommand();
+        if (comando.equals(ELIMINAR)) {
+            int posicion = jTable1.getSelectedRow();
+            int ID = myList.get(posicion).getIdAlarma();
+            borrarAl(ID);
+        }
+    }//GEN-LAST:event_jButtonEliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,10 +175,42 @@ public class Ajustes extends javax.swing.JFrame {
         });
     }
 
+    private void construirTabla() {
+        String titulos[] = {"ID", "Nombre", "Hora Inicio", "Hora Fin", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"};
+        String informacion[][] = obtenerMatriz2();
+
+        /*jTable1(informacion, titulos);
+        jTable.setViewportView(jTable1);*/
+    }
+    
+    private String[][] obtenerMatriz2() {
+
+        Configuracion config = new Configuracion();
+        myList = config.BuscaAl();
+        String matrizInfo[][] = new String[myList.size()][11];
+
+        for (int i = 0; i < myList.size(); i++) {
+            matrizInfo[i][0] = myList.get(i).getIdAlarma() + "";
+            matrizInfo[i][1] = myList.get(i).getNombrePuerta() + "";
+            matrizInfo[i][2]= myList.get(i).getHora1() + "";
+            matrizInfo[i][3]=myList.get(i).getHora2() + "";
+            matrizInfo[i][4]=myList.get(i).isLun()+"";
+            matrizInfo[i][5]=myList.get(i).isMar()+"";
+            matrizInfo[i][6]=myList.get(i).isMie()+"";
+            matrizInfo[i][7]=myList.get(i).isJue()+"";
+            matrizInfo[i][8]=myList.get(i).isVie()+"";
+            matrizInfo[i][9]=myList.get(i).isSab()+"";
+            matrizInfo[i][10]=myList.get(i).isDom()+""; 
+        }
+        return matrizInfo;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton config;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonConfig;
+    private javax.swing.JButton jButtonEliminar;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
 }

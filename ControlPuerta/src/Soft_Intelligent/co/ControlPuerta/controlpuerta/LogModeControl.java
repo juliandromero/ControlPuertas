@@ -42,10 +42,10 @@ public class LogModeControl {
         return Hf;
     }
 
-    public int getID_Estado() {
+     
+      public int getID_Estado() {
         return ID_Estado;
     }
-    
       public String getEstado() {
         return Estado;
     }

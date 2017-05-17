@@ -28,15 +28,17 @@ public class LogModelo {
         try {
             PreparedStatement Guardar = null;
 
-            Guardar = Conexion.prepareStatement("INSERT INTO " + this.tabla + "( Puerta, IP, Hi, Hf, Estado, Ubicacion) VALUES(?,?,?,?,?,?)");
+            Guardar = Conexion.prepareStatement("INSERT INTO " + this.tabla + "( \"Puerta\", \"IP\", \"Hora Inicial\", \"Hora Final\", \"Estado\", \"Ubicacion\", \"Nombre\") VALUES(?,?,?,?,?,?,?)");
             Guardar.setString(1, Log.getPuerta());
             Guardar.setString(2, Log.getIP());
             Guardar.setString(3, Log.getHi());
-            Guardar.setString(4, Log.getHi());
-            Guardar.setString(5, Log.getHf());
-            Guardar.setString(6, Log.getEstado());
-            Guardar.setString(7, Log.getUbicacion());
-            Guardar.setInt(5, Log.getID_Estado());
+            Guardar.setString(4, Log.getHf());
+            Guardar.setString(5, Log.getEstado());
+            Guardar.setString(6, Log.getUbicacion());
+            Guardar.setString(7, Log.getNombre());
+            Guardar.setInt(8, Log.getID_Estado());
+            
+            
 
             Guardar.executeUpdate();
 
@@ -66,8 +68,10 @@ public class LogModelo {
                 Puerta.setUbicacion(rs.getString("Ubicacion"));
                 Puerta.setIP(rs.getString("IP"));
                 Puerta.setEstado(rs.getString("Estado"));
-                Puerta.setEstado(rs.getString("Hi"));
-                Puerta.setEstado(rs.getString("Hi"));
+                Puerta.setEstado(rs.getString("Hora inicial"));
+                Puerta.setEstado(rs.getString("Hora Final"));
+                Puerta.setEstado(rs.getString("Nombre Usuario"));
+                Puerta.setEstado(rs.getString("Ubicacion"));
                 Lista.add(Puerta);
             }
             rs.close();
@@ -81,6 +85,10 @@ public class LogModelo {
 
         }
         return Lista;
+    }
+
+    public void setVisible(boolean b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
