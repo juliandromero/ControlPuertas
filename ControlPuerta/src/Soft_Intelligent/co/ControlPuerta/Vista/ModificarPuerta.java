@@ -23,7 +23,9 @@ public class ModificarPuerta extends javax.swing.JFrame {
     DefaultTableModel table = new DefaultTableModel();
     public static String a;
     public static String b;
-    private ArrayList<EstadosGeneralesControl> myList;
+    private ArrayList<Modificar> myList;
+    Ajustes x = new Ajustes();
+    Modificar modificar = new Modificar();
 
     //constructor de la clase  
     public ModificarPuerta() {
@@ -34,16 +36,7 @@ public class ModificarPuerta extends javax.swing.JFrame {
         setTitle("Modificar Puerta");
         
         myList = new ArrayList();
-        
-        /*table = new DefaultTableModel();
-        table.addColumn("Nombre");
-        table.addColumn("Ip");
-        table.addColumn("Estado");
-        this.jTable2.setModel(table);*/
-
     }
-
-    Modificar modificar = new Modificar();
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -63,7 +56,6 @@ public class ModificarPuerta extends javax.swing.JFrame {
         jButtonaplicar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jButtoncerrar = new javax.swing.JButton();
-        jToggleButton1 = new javax.swing.JToggleButton();
         jButtonatras = new javax.swing.JButton();
         txtipPuerta = new javax.swing.JTextField();
         txtpuertaAcual = new javax.swing.JTextField();
@@ -147,9 +139,6 @@ public class ModificarPuerta extends javax.swing.JFrame {
                 jButtoncerrarActionPerformed(evt);
             }
         });
-
-        jToggleButton1.setForeground(new java.awt.Color(255, 0, 0));
-        jToggleButton1.setText("Desactivado");
 
         jButtonatras.setText("Atras");
         jButtonatras.addActionListener(new java.awt.event.ActionListener() {
@@ -251,9 +240,7 @@ public class ModificarPuerta extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButtonatras)
-                        .addGap(111, 111, 111)
-                        .addComponent(jToggleButton1)
-                        .addGap(18, 18, 18)
+                        .addGap(228, 228, 228)
                         .addComponent(jButtonaplicar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtoncerrar)
@@ -328,8 +315,7 @@ public class ModificarPuerta extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonaplicar)
                     .addComponent(jButtoncerrar)
-                    .addComponent(jButtonatras)
-                    .addComponent(jToggleButton1))
+                    .addComponent(jButtonatras))
                 .addContainerGap())
         );
 
@@ -351,13 +337,11 @@ public class ModificarPuerta extends javax.swing.JFrame {
         System.exit(0);
 
     }//GEN-LAST:event_jButtoncerrarActionPerformed
-    Ajustes x = new Ajustes();
+
     public void jButtonaplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonaplicarActionPerformed
-               
         Modificar mod = new Modificar();
         Configuracion config = new Configuracion();
         ConectMySql con = new ConectMySql();
-        
         
         a = jSpinner1.getValue().toString().substring(11,16); // asi captura el dato del spinner en un string
         b = jSpinner2.getValue().toString().substring(11,16);
@@ -377,36 +361,13 @@ public class ModificarPuerta extends javax.swing.JFrame {
         mod.setHora2(b);
 
         try {
-            config.guardarSemana(con.conexion(), mod);
+            config.guardarAl(con.conexion(), mod);
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
          }   
        
     }//GEN-LAST:event_jButtonaplicarActionPerformed
-
-       // private ArrayList<Modificar> myList;
-
-    
-     private String[][] obtenerMatriz2() {
-
-        Configuracion config = new Configuracion();
-        myList = config.BuscaAl();
-
-        String matrizInfo[][] = new String[myList.size()][3];
-
-        for (int i = 0; i < myList.size(); i++) {
-            matrizInfo[i][0] = myList.get(i).getIdAlarma() + "";
-            matrizInfo[i][1] = myList.get(i).getNombrePuerta() + "";
-           
-            
-        }
-
-        return matrizInfo;
-    }
-    
-    
-    
     
     private void jButtonatrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonatrasActionPerformed
         Ajustes obj = new Ajustes();
@@ -448,7 +409,6 @@ public class ModificarPuerta extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JCheckBox checkdom;
     public static javax.swing.JCheckBox checkjue;
@@ -477,7 +437,6 @@ public class ModificarPuerta extends javax.swing.JFrame {
     public static javax.swing.JSpinner jSpinner2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    public static javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTree jTree1;
     private javax.swing.JTree jTree2;
@@ -486,5 +445,4 @@ public class ModificarPuerta extends javax.swing.JFrame {
     public static javax.swing.JTextField txtnombrePuerta;
     public static javax.swing.JTextField txtpuertaAcual;
     // End of variables declaration//GEN-END:variables
-
 }
