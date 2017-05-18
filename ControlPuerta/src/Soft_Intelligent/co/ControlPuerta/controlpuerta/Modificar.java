@@ -11,11 +11,12 @@ public class Modificar {
     private int IdAlarma;
     private boolean lun, mar, mie, jue, vie, sab, dom;
     
-    private  String nombrePuerta="";
+    private  String nombrePuerta;
     private  int ipPuerta=0, cantidadApertura;
     private  String hora1 , hora2;
 
-    public Modificar(boolean lun, boolean mar, boolean mie, boolean jue, boolean vie, boolean sab, boolean dom, Integer IdAlarma) {
+    public Modificar(int IdAlarma, String nombrePuerta, String hora1, String hora2, int cantidadApertura, boolean lun, boolean mar, boolean mie, boolean jue, boolean vie, boolean sab, boolean dom) {
+        this.IdAlarma = IdAlarma;
         this.lun = lun;
         this.mar = mar;
         this.mie = mie;
@@ -23,9 +24,12 @@ public class Modificar {
         this.vie = vie;
         this.sab = sab;
         this.dom = dom;
-        this.IdAlarma = IdAlarma;
+        this.nombrePuerta = nombrePuerta;
+        this.cantidadApertura = cantidadApertura;
+        this.hora1 = hora1;
+        this.hora2 = hora2;
     }
-
+    
     public Modificar() {
         this.lun = false;
         this.mar = false;
@@ -36,6 +40,10 @@ public class Modificar {
         this.dom = false;
         this.IdAlarma = 0;
     }
+
+//    public Modificar(int aInt, String string, String string0, String string1, String string2, boolean aBoolean, boolean aBoolean0, boolean aBoolean1, boolean aBoolean2, boolean aBoolean3, boolean aBoolean4, boolean aBoolean5) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 
     public boolean isLun() {
         return lun;

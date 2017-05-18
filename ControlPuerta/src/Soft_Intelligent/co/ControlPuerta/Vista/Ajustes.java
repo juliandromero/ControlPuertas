@@ -1,8 +1,13 @@
 package Soft_Intelligent.co.ControlPuerta.Vista;
 
+import Soft_Intelligent.co.ControlPuerta.Modelo.ConectMySql;
 import Soft_Intelligent.co.ControlPuerta.Modelo.Configuracion;
 import Soft_Intelligent.co.ControlPuerta.controlpuerta.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -13,13 +18,15 @@ public class Ajustes extends javax.swing.JFrame {
 
     DefaultTableModel tabla;
     public static String ELIMINAR = "ELIMINAR";
-    private ArrayList<Modificar> myList;
+    private List<Modificar> myList;
     Configuracion con;
     Modificar modificar = new Modificar();
-    
+    ConectMySql cone = new ConectMySql();
+
     //constructor de la clase 
     public Ajustes() {
         initComponents();
+        this.cargar_lista_de_alarmas();
         //Propiedades del frame
         setLocationRelativeTo(null);
         setResizable(false);
@@ -30,6 +37,7 @@ public class Ajustes extends javax.swing.JFrame {
         tabla.addColumn("Nombre");
         tabla.addColumn("Hora Inicio");
         tabla.addColumn("Hora Fin");
+        tabla.addColumn("CantidadApertura");
         tabla.addColumn("Lunes");
         tabla.addColumn("Martes");
         tabla.addColumn("Miercoles");
@@ -38,7 +46,41 @@ public class Ajustes extends javax.swing.JFrame {
         tabla.addColumn("Sabado");
         tabla.addColumn("Domingo");
         this.jTable1.setModel(tabla);
+        //obtenerMatriz2();
+cargar_lista_de_alarmas();
+    }
 
+    private void cargar_lista_de_alarmas() {
+        System.out.println("Fuera del try");
+        try {
+            System.out.println("Fuera del dentrot");
+            this.myList = this.con.recuperarTodas(cone.conexion());
+             System.out.println("Fuera del despues de conexion 1");
+            DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+            dtm.setRowCount(0);
+            System.out.println("Fuera del despues de conexion");
+
+            for (int i = 0; i < this.myList.size(); i++) {
+              //  String IdAlarma = this.modificar.getIdAlarma().toString();
+                
+                dtm.addRow(new Object[]{
+                    this.myList.get(i).getIdAlarma(),
+                    this.myList.get(i).getNombrePuerta(),
+                    this.myList.get(i).getHora1(),
+                    this.myList.get(i).getHora2(),
+                    this.myList.get(i).getCantidadApertura(),
+                    this.myList.get(i).isLun(),
+                    this.myList.get(i).isMar(),
+                    this.myList.get(i).isMie(),
+                    this.myList.get(i).isJue(),
+                    this.myList.get(i).isVie(),
+                    this.myList.get(i).isSab(),
+                    this.myList.get(i).isDom(),});
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
+        } 
     }
 
     /**
@@ -176,13 +218,13 @@ public class Ajustes extends javax.swing.JFrame {
     }
 
     private void construirTabla() {
-        String titulos[] = {"ID", "Nombre", "Hora Inicio", "Hora Fin", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"};
+        String titulos[] = {"ID", "Nombre", "Hora Inicio", "CantidadApertura","Hora Fin", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"};
         String informacion[][] = obtenerMatriz2();
 
-        /*jTable1(informacion, titulos);
-        jTable.setViewportView(jTable1);*/
+        jTable1 = new JTable(informacion, titulos);
+        
     }
-    
+
     private String[][] obtenerMatriz2() {
 
         Configuracion config = new Configuracion();
@@ -192,19 +234,20 @@ public class Ajustes extends javax.swing.JFrame {
         for (int i = 0; i < myList.size(); i++) {
             matrizInfo[i][0] = myList.get(i).getIdAlarma() + "";
             matrizInfo[i][1] = myList.get(i).getNombrePuerta() + "";
-            matrizInfo[i][2]= myList.get(i).getHora1() + "";
-            matrizInfo[i][3]=myList.get(i).getHora2() + "";
-            matrizInfo[i][4]=myList.get(i).isLun()+"";
-            matrizInfo[i][5]=myList.get(i).isMar()+"";
-            matrizInfo[i][6]=myList.get(i).isMie()+"";
-            matrizInfo[i][7]=myList.get(i).isJue()+"";
-            matrizInfo[i][8]=myList.get(i).isVie()+"";
-            matrizInfo[i][9]=myList.get(i).isSab()+"";
-            matrizInfo[i][10]=myList.get(i).isDom()+""; 
+            matrizInfo[i][2] = myList.get(i).getHora1() + "";
+            matrizInfo[i][3] = myList.get(i).getHora2() + "";
+            matrizInfo[i][4] =myList.get(i).getCantidadApertura() + "";
+            matrizInfo[i][5] = myList.get(i).isLun() + "";
+            matrizInfo[i][6] = myList.get(i).isMar() + "";
+            matrizInfo[i][7] = myList.get(i).isMie() + "";
+            matrizInfo[i][8] = myList.get(i).isJue() + "";
+            matrizInfo[i][9] = myList.get(i).isVie() + "";
+            matrizInfo[i][10] = myList.get(i).isSab() + "";
+            matrizInfo[i][11] = myList.get(i).isDom() + "";
         }
         return matrizInfo;
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonConfig;

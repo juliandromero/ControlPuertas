@@ -9,6 +9,7 @@ import Soft_Intelligent.co.ControlPuerta.controlpuerta.Modificar;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 /**
  *
@@ -101,5 +102,21 @@ public class Configuracion {
         }
      }
      
+     public List<Modificar> recuperarTodas(Connection conexion) throws SQLException{
+      List<Modificar> modificar = new ArrayList<>();
+      try{
+         System.out.println("SELECT * FROM alarma ORDER BY ID");
+         PreparedStatement consulta = conexion.prepareStatement("SELECT * FROM alarma ORDER BY ID");
+         ResultSet resultado = consulta.executeQuery();
+         while(resultado.next()){
+            modificar.add(new Modificar(resultado.getInt("ID"), resultado.getString("Nombre"), resultado.getString("HoraIni"), resultado.getString("HoraFin"), resultado.getInt("CantidadApertura"), resultado.getBoolean("Lunes"), resultado.getBoolean("Martes"), resultado.getBoolean("Miercoles"), resultado.getBoolean("Jueves"), resultado.getBoolean("Viernes"), resultado.getBoolean("Sabado"), resultado.getBoolean("Domingo")));
+         }
+      }catch(SQLException ex){
+                   System.out.println("traer");
+
+         throw new SQLException(ex);
+      }
+      return modificar;
+   }
      
 }
