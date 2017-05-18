@@ -209,6 +209,8 @@ public class LoginUser extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Usuario O Contraseña Incorrecto");
             }
+            
+            
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             JOptionPane.showMessageDialog(this, "Usuario O Contraseña Incorrecto");
