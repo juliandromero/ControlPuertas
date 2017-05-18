@@ -198,6 +198,15 @@ public class Registrar extends javax.swing.JFrame {
             ConectMySql con = new ConectMySql();
 
             bdreg.Crear(con.conexion(), reg);
+            
+            jTextField1.setText("");
+            jTextField2.setText("");
+            jTextField3.setText("");
+            jTextField4.setText("");
+            jTextField5.setText("");
+            jTextField6.setText("");
+            jPasswordField1.setText("");           
+            
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             JOptionPane.showMessageDialog(this, "Ha surgido un error y no se ha podido guardar el registro.");
