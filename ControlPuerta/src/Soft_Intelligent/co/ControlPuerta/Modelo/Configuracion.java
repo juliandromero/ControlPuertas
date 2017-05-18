@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 public class Configuracion {
     private final String tabla = "Alarma"; 
     
-     public void guardarSemana(Connection Conexion, Modificar mod) throws SQLException {
+     public void guardarAl(Connection Conexion, Modificar mod) throws SQLException {
         try {
             PreparedStatement Guardar = null;
             
@@ -86,5 +86,20 @@ public class Configuracion {
         }
         return myList;
     }
+     
+     public void eliminarAl(int ID){
+     ConectMySql conex = new ConectMySql();
+     Modificar mod;
+     
+     try{
+         Statement estatuto = conex.conexion().createStatement();
+            System.out.println("Delete From " + this.tabla + " Where ID = " + ID);
+            estatuto.execute("Delete From " + this.tabla + " Where ID = " + ID);
+            } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al eliminar el registro por dependencia en evento");
+            System.out.println(e.getMessage());
+        }
+     }
+     
      
 }
