@@ -39,7 +39,6 @@ public class EstadosGenerales extends JFrame implements ActionListener {
     JTextField Field;
     JTextField Field2;
     JTextField Field3;
-//    JTextField Field4;
     private JComboBox ComboBox1;
     JLabel Label;
     JButton Boton1;
@@ -70,6 +69,7 @@ public class EstadosGenerales extends JFrame implements ActionListener {
         InicializaTabla();
         construirTabla();
         InicializaBotones();
+        ConsultaEstado();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         bdeg = new EstadoGeneral();
@@ -106,13 +106,8 @@ public class EstadosGenerales extends JFrame implements ActionListener {
         Label.setBounds(380, 110, 230, 30);
         getContentPane().add(Label);
 
-//        Field4 = new JTextField();
-//        Field4.setBounds(453, 110, 230, 30);
-//        getContentPane().add(Field4);
-        
         ComboBox1 = new JComboBox();
         ComboBox1.setBounds(453, 110, 230, 30);
-        ComboBox1.addItem("Seleccion");
         getContentPane().add(ComboBox1);
 
         coneg = new EstadosGeneralesControl();
@@ -159,6 +154,17 @@ public class EstadosGenerales extends JFrame implements ActionListener {
         mibarra1 = new JScrollPane();
         mibarra1.setBounds(35, 200, 700, 130);
         getContentPane().add(mibarra1);
+
+    }
+
+    private void ConsultaEstado() {
+        ComboBox1.removeAllItems();
+        EstadoGeneral CEstado = new EstadoGeneral();
+        ArrayList< EstadosGeneralesControl> listaEstados = CEstado.consultarEstados();
+
+        for (int i = 0; i < listaEstados.size(); i++) {
+            ComboBox1.addItem(listaEstados.get(i).getEstado());
+        }
 
     }
 
@@ -276,16 +282,21 @@ public class EstadosGenerales extends JFrame implements ActionListener {
             construirTabla();
             System.out.println("Refresco tabla despues de eliminar");
         } else if (comando.equals(ADICIONAR)) {
-        //    Estado = ComboBox1.getName();
+
             IP = Field3.getText();
             Ubicacion = Field2.getText();
             Nombre = Field.getText();
-            coneg.setEstado(Estado);
+            Estado = ComboBox1.getSelectedItem().toString();
             coneg.setID_Estado(Estado);
             coneg.setNombre(Nombre);
             coneg.setIP(IP);
             coneg.setUbicacion(Ubicacion);
-
+            
+            //Limpia valores
+            Field.setText("");
+            Field2.setText("");
+            Field3.setText("");
+            
             ConectMySql con = new ConectMySql();
 
             try {
@@ -296,7 +307,7 @@ public class EstadosGenerales extends JFrame implements ActionListener {
             }
             construirTabla();
             System.out.println("Refresco tabla despues de adicionar");
-        } 
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

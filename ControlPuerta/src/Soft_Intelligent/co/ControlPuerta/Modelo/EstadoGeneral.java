@@ -23,11 +23,12 @@ import javax.swing.JOptionPane;
 public class EstadoGeneral {
 
     private final String tabla = "Dispositivo";
+    private final String tabla2 = "Estado";
 
     public void CrearDisp(Connection Conexion, EstadosGeneralesControl EstadoGeneral) throws SQLException {
         try {
             PreparedStatement Guardar = null;
-            System.out.println("INSERT INTO " + this.tabla + "( Nombre, Ubicacion, IP,ID_Estado) VALUES(?,?,?,?)");
+            System.out.println("INSERT INTO " + this.tabla + "( Nombre, Ubicacion, IP,ID_Estado) VALUES('" + EstadoGeneral.getNombre() + "','" + EstadoGeneral.getUbicacion() + "','" + EstadoGeneral.getIP() + "','" + EstadoGeneral.getID_Estado() + "')");
             Guardar = Conexion.prepareStatement("INSERT INTO " + this.tabla + "( Nombre, Ubicacion, IP,ID_Estado) VALUES(?,?,?,?)");
             Guardar.setString(1, EstadoGeneral.getNombre());
             Guardar.setString(2, EstadoGeneral.getUbicacion());
@@ -50,6 +51,7 @@ public class EstadoGeneral {
             Statement estatuto = conex.conexion().createStatement();
             System.out.println("Delete From " + this.tabla + " Where ID = " + ID);
             estatuto.execute("Delete From " + this.tabla + " Where ID = " + ID);
+         //   System.out.println("Registro eliminado");
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al eliminar el registro X dependencia en evento");
@@ -66,7 +68,8 @@ public class EstadoGeneral {
         try {
 
             Statement estatuto = conex.conexion().createStatement();
-            ResultSet rs = estatuto.executeQuery("SELECT Dis.ID,Dis.Nombre,Dis.Ubicacion,Dis.IP,Est.Nombre as Estado FROM Dispositivo Dis inner join Estado Est on Dis.ID_Estado = Est.ID Order by ID");
+            System.out.println("SELECT Dis.ID,Dis.Nombre,Dis.Ubicacion,Dis.IP,Est.Nombre as Estado FROM " + this.tabla + " Dis inner join " + this.tabla2 + " Est on Dis.ID_Estado = Est.ID Order by ID");
+            ResultSet rs = estatuto.executeQuery("SELECT Dis.ID,Dis.Nombre,Dis.Ubicacion,Dis.IP,Est.Nombre as Estado FROM " + this.tabla + " Dis inner join " + this.tabla2 + " Est on Dis.ID_Estado = Est.ID Order by ID");
 
             while (rs.next()) {
                 Puer = new EstadosGeneralesControl();
@@ -83,10 +86,38 @@ public class EstadoGeneral {
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            JOptionPane.showMessageDialog(null, "Error al consultar", "Error",
+            JOptionPane.showMessageDialog(null, "Error al consultar Dispositivos", "Error",
                     JOptionPane.ERROR_MESSAGE);
 
         }
         return miLista;
+    }
+    
+public ArrayList<EstadosGeneralesControl> consultarEstados() {
+        ConectMySql conex = new ConectMySql();
+        ArrayList<EstadosGeneralesControl> EstadoList = new ArrayList<EstadosGeneralesControl>();
+        EstadosGeneralesControl Est;
+        try {
+
+            Statement estatuto = conex.conexion().createStatement();
+            System.out.println("SELECT Nombre FROM " + this.tabla2);
+            ResultSet rs = estatuto.executeQuery("SELECT Nombre FROM " + this.tabla2 );
+
+            while (rs.next()) {
+                Est = new EstadosGeneralesControl();
+                Est.setEstado(rs.getString("Nombre"));
+                EstadoList.add(Est);
+            }
+            rs.close();
+            estatuto.close();
+            conex.desconectar();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al consultar Estado", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+
+        }
+        return EstadoList;
     }
 }
