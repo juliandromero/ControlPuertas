@@ -215,6 +215,9 @@ public class LoginUser extends javax.swing.JFrame {
             System.out.println(ex.getMessage());
             JOptionPane.showMessageDialog(this, "Usuario O Contraseña Incorrecto");
         }
+        catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(this, "Usuario O Contraseña Incorrecto");
+        }
     }//GEN-LAST:event_ingresoActionPerformed
 
     private void jLabel3AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jLabel3AncestorAdded

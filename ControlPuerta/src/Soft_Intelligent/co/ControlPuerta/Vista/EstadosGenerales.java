@@ -134,7 +134,7 @@ public class EstadosGenerales extends JFrame implements ActionListener {
         });
 
         Boton3 = new JButton("Adicionar");
-        Boton3.setBounds(500, 340, 80, 25);
+        Boton3.setBounds(480, 340, 100, 25);
         Boton3.addActionListener(this);
         Boton3.setActionCommand(ADICIONAR);
         getContentPane().add(Boton3);
