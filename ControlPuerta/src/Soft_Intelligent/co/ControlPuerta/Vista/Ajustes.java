@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,21 +20,21 @@ public class Ajustes extends javax.swing.JFrame {
     DefaultTableModel tabla;
     public static String ELIMINAR = "ELIMINAR";
     private List<Modificar> myList;
-    Configuracion con;
+    Configuracion con = new Configuracion();
     Modificar modificar = new Modificar();
     ConectMySql cone = new ConectMySql();
 
     //constructor de la clase 
     public Ajustes() {
         initComponents();
-        this.cargar_lista_de_alarmas();
+
         //Propiedades del frame
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Modificar Puerta");
         //Propiedades de la tabla
         tabla = new DefaultTableModel();
-        tabla.addColumn("Ip");
+        tabla.addColumn("ID");
         tabla.addColumn("Nombre");
         tabla.addColumn("Hora Inicio");
         tabla.addColumn("Hora Fin");
@@ -46,8 +47,8 @@ public class Ajustes extends javax.swing.JFrame {
         tabla.addColumn("Sabado");
         tabla.addColumn("Domingo");
         this.jTable1.setModel(tabla);
-        //obtenerMatriz2();
-cargar_lista_de_alarmas();
+        cargar_lista_de_alarmas();
+
     }
 
     private void cargar_lista_de_alarmas() {
@@ -55,14 +56,14 @@ cargar_lista_de_alarmas();
         try {
             System.out.println("Fuera del dentrot");
             this.myList = this.con.recuperarTodas(cone.conexion());
-             System.out.println("Fuera del despues de conexion 1");
+            System.out.println("Fuera del despues de conexion 1");
             DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
             dtm.setRowCount(0);
             System.out.println("Fuera del despues de conexion");
 
             for (int i = 0; i < this.myList.size(); i++) {
-              //  String IdAlarma = this.modificar.getIdAlarma().toString();
-                
+                //  String IdAlarma = this.modificar.getIdAlarma().toString();
+
                 dtm.addRow(new Object[]{
                     this.myList.get(i).getIdAlarma(),
                     this.myList.get(i).getNombrePuerta(),
@@ -77,10 +78,11 @@ cargar_lista_de_alarmas();
                     this.myList.get(i).isSab(),
                     this.myList.get(i).isDom(),});
             }
+            dtm.getTableModelListeners();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             JOptionPane.showMessageDialog(this, "Ha surgido un error y no se han podido recuperar los registros");
-        } 
+        }
     }
 
     /**
@@ -111,7 +113,7 @@ cargar_lista_de_alarmas();
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButtonConfig.setText("Configurar");
+        jButtonConfig.setText("Agregar");
         jButtonConfig.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonConfigActionPerformed(evt);
@@ -119,6 +121,11 @@ cargar_lista_de_alarmas();
         });
 
         jButton1.setText("Atras");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButtonEliminar.setText("Eliminar");
         jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -166,6 +173,7 @@ cargar_lista_de_alarmas();
     private void jButtonConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfigActionPerformed
         ModificarPuerta obj = new ModificarPuerta();
         obj.setVisible(true);
+        dispose();
 
 
     }//GEN-LAST:event_jButtonConfigActionPerformed
@@ -174,13 +182,25 @@ cargar_lista_de_alarmas();
         con.eliminarAl(ID);
     }
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
-        String comando = evt.getActionCommand();
-        if (comando.equals(ELIMINAR)) {
-            int posicion = jTable1.getSelectedRow();
+            try {
+                        int posicion = jTable1.getSelectedRow();
             int ID = myList.get(posicion).getIdAlarma();
             borrarAl(ID);
+            cargar_lista_de_alarmas();
+        } catch (Exception e) {
+                JOptionPane.showMessageDialog(this,"No ha seleccionado ningun dato");
         }
+
+        
     }//GEN-LAST:event_jButtonEliminarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        MenuDeOpciones mdo = new MenuDeOpciones();
+        mdo.setVisible(true);
+        dispose();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,11 +238,11 @@ cargar_lista_de_alarmas();
     }
 
     private void construirTabla() {
-        String titulos[] = {"ID", "Nombre", "Hora Inicio", "CantidadApertura","Hora Fin", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"};
+        String titulos[] = {"ID", "Nombre", "Hora Inicio", "CantidadApertura", "Hora Fin", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"};
         String informacion[][] = obtenerMatriz2();
 
         jTable1 = new JTable(informacion, titulos);
-        
+
     }
 
     private String[][] obtenerMatriz2() {
@@ -236,7 +256,7 @@ cargar_lista_de_alarmas();
             matrizInfo[i][1] = myList.get(i).getNombrePuerta() + "";
             matrizInfo[i][2] = myList.get(i).getHora1() + "";
             matrizInfo[i][3] = myList.get(i).getHora2() + "";
-            matrizInfo[i][4] =myList.get(i).getCantidadApertura() + "";
+            matrizInfo[i][4] = myList.get(i).getCantidadApertura() + "";
             matrizInfo[i][5] = myList.get(i).isLun() + "";
             matrizInfo[i][6] = myList.get(i).isMar() + "";
             matrizInfo[i][7] = myList.get(i).isMie() + "";

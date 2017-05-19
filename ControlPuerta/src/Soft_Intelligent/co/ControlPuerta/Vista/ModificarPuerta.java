@@ -55,7 +55,6 @@ public class ModificarPuerta extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButtonaplicar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jButtoncerrar = new javax.swing.JButton();
         jButtonatras = new javax.swing.JButton();
         txtipPuerta = new javax.swing.JTextField();
         txtpuertaAcual = new javax.swing.JTextField();
@@ -132,13 +131,6 @@ public class ModificarPuerta extends javax.swing.JFrame {
         });
 
         jLabel7.setText("Puerta actual");
-
-        jButtoncerrar.setText("Cerrar");
-        jButtoncerrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtoncerrarActionPerformed(evt);
-            }
-        });
 
         jButtonatras.setText("Atras");
         jButtonatras.addActionListener(new java.awt.event.ActionListener() {
@@ -237,18 +229,16 @@ public class ModificarPuerta extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButtonatras)
-                        .addGap(228, 228, 228)
-                        .addComponent(jButtonaplicar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtoncerrar)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(6, 6, 6))
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonatras)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonaplicar)
+                        .addGap(25, 25, 25))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,7 +270,7 @@ public class ModificarPuerta extends javax.swing.JFrame {
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtcantidadApertura, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -314,7 +304,6 @@ public class ModificarPuerta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonaplicar)
-                    .addComponent(jButtoncerrar)
                     .addComponent(jButtonatras))
                 .addContainerGap())
         );
@@ -332,11 +321,6 @@ public class ModificarPuerta extends javax.swing.JFrame {
         // TODO add your handling code here:
         desactivarcontroles();
     }//GEN-LAST:event_formWindowOpened
-
-    private void jButtoncerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtoncerrarActionPerformed
-        System.exit(0);
-
-    }//GEN-LAST:event_jButtoncerrarActionPerformed
 
     public void jButtonaplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonaplicarActionPerformed
         Modificar mod = new Modificar();
@@ -360,6 +344,9 @@ public class ModificarPuerta extends javax.swing.JFrame {
         mod.setHora1(a);
         mod.setHora2(b);
 
+        Ajustes ajus = new Ajustes();
+        ajus.setVisible(true);
+        dispose();
         try {
             config.guardarAl(con.conexion(), mod);
         } catch (SQLException ex) {
@@ -419,7 +406,6 @@ public class ModificarPuerta extends javax.swing.JFrame {
     public static javax.swing.JCheckBox checkvie;
     public javax.swing.JButton jButtonaplicar;
     private javax.swing.JButton jButtonatras;
-    private javax.swing.JButton jButtoncerrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

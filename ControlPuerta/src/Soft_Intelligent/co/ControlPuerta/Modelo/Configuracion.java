@@ -65,13 +65,13 @@ public class Configuracion {
                 alarma.setNombrePuerta(rs.getString("Nombre"));
                 alarma.setHora1(rs.getString("HoraIni"));
                 alarma.setHora2(rs.getString("HoraFin"));
-                alarma.setLun(rs.getBoolean("Lunes"));
-                alarma.setMar(rs.getBoolean("Martes"));
-                alarma.setMie(rs.getBoolean("Miercoles"));
-                alarma.setJue(rs.getBoolean("Jueves"));
-                alarma.setVie(rs.getBoolean("Viernes"));
-                alarma.setSab(rs.getBoolean("Sabado"));
-                alarma.setDom(rs.getBoolean("Domingo"));
+                alarma.setLun(Boolean.valueOf(rs.getString("Lunes")));
+                alarma.setMar(Boolean.valueOf(rs.getString("Martes")));
+                alarma.setMie(Boolean.valueOf(rs.getString("Miercoles")));
+                alarma.setJue(Boolean.valueOf(rs.getString("Jueves")));
+                alarma.setVie(Boolean.valueOf(rs.getString("Viernes")));
+                alarma.setSab(Boolean.valueOf(rs.getString("Sabado")));
+                alarma.setDom(Boolean.valueOf(rs.getString("Domingo")));
                 
                 myList.add(alarma);
             }
@@ -90,7 +90,6 @@ public class Configuracion {
      
      public void eliminarAl(int ID){
      ConectMySql conex = new ConectMySql();
-     Modificar mod;
      
      try{
          Statement estatuto = conex.conexion().createStatement();
@@ -110,6 +109,7 @@ public class Configuracion {
          ResultSet resultado = consulta.executeQuery();
          while(resultado.next()){
             modificar.add(new Modificar(resultado.getInt("ID"), resultado.getString("Nombre"), resultado.getString("HoraIni"), resultado.getString("HoraFin"), resultado.getInt("CantidadApertura"), resultado.getBoolean("Lunes"), resultado.getBoolean("Martes"), resultado.getBoolean("Miercoles"), resultado.getBoolean("Jueves"), resultado.getBoolean("Viernes"), resultado.getBoolean("Sabado"), resultado.getBoolean("Domingo")));
+         
          }
       }catch(SQLException ex){
                    System.out.println("traer");

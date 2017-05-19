@@ -29,9 +29,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
 public class Logi extends JFrame implements ActionListener {
@@ -60,7 +58,7 @@ public class Logi extends JFrame implements ActionListener {
     
 
     private ArrayList<LogModeControl> miLista;
-    public static String REFRESCAR = "REFRESCAR";
+    public static String ATRAS = "ATRAS";
     
     
     LogModelo bdeg;
@@ -85,74 +83,13 @@ public class Logi extends JFrame implements ActionListener {
 
     }
     
-//        private void InicializaFormularios() {
-//
-//        Label = new JLabel("Puerta");
-//        Label.setBounds(27, 70, 230, 30);
-//        getContentPane().add(Label);
-//
-//        Field = new JTextField();
-//        Field.setBounds(100, 70, 230, 30);
-//        getContentPane().add(Field);
-//
-//        Label = new JLabel("IP");
-//        Label.setBounds(27, 110, 230, 30);
-//        getContentPane().add(Label);
-//
-//        Field2 = new JTextField();
-//        Field2.setBounds(100, 110, 230, 30);
-//        getContentPane().add(Field2);
-//
-//        Label = new JLabel("Hora Inicial");
-//        Label.setBounds(380, 70, 230, 30);
-//        getContentPane().add(Label);
-//
-//        Field3 = new JTextField();
-//        Field3.setBounds(453, 70, 230, 30);
-//        getContentPane().add(Field3);
-//
-//        Label = new JLabel("Hora Final");
-//        Label.setBounds(380, 110, 230, 30);
-//        getContentPane().add(Label);
-//
-//        JTextField Field4 = new JTextField();
-//        Field4.setBounds(453, 110, 230, 30);
-//        getContentPane().add(Field4);
-//        
-//        Label = new JLabel("Estado");
-//        Label.setBounds(380, 110, 230, 30);
-//        getContentPane().add(Label);
-//
-//        Field4 = new JTextField();
-//        Field4.setBounds(453, 110, 230, 30);
-//        getContentPane().add(Field4);
-//        
-//        Label = new JLabel("Ubicacion");
-//        Label.setBounds(380, 110, 230, 30);
-//        getContentPane().add(Label);
-//
-//        Field4 = new JTextField();
-//        Field4.setBounds(453, 110, 230, 30);
-//        getContentPane().add(Field4);
-//        
-//        Label = new JLabel("Nombre de Usuario");
-//        Label.setBounds(380, 110, 230, 30);
-//        getContentPane().add(Label);
-//
-//        Field4 = new JTextField();
-//        Field4.setBounds(453, 110, 230, 30);
-//        getContentPane().add(Field4);
-//
-//        coneg = new LogModeControl();
-//
-//    }
-//    
+
     private void InicializaBoton() {
 
-        Boton3 = new JButton("Refrescar");
-        Boton3.setBounds(500, 340, 90, 40);
+        Boton3 = new JButton("ATRAS");
+        Boton3.setBounds(500, 300, 90, 40);
         Boton3.addActionListener(this);
-        Boton3.setActionCommand(REFRESCAR);
+        Boton3.setActionCommand(ATRAS);
         getContentPane().add(Boton3);
         
     }
@@ -168,7 +105,7 @@ public class Logi extends JFrame implements ActionListener {
         getContentPane().add(labelTitulo);
         
         mibarra1 = new JScrollPane();
-        mibarra1.setBounds(35, 200, 700, 130);
+        mibarra1.setBounds(35, 150, 700, 130);
         getContentPane().add(mibarra1);
     }
         
@@ -267,20 +204,14 @@ public class Logi extends JFrame implements ActionListener {
 //            }
 //        
 //    }
-         public void actionPerformed2(ActionEvent e) {
+         public void actionPerformed(ActionEvent e) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         String comando = e.getActionCommand();
-        if (comando == REFRESCAR) {
-
-//            miLista = new ArrayList();
-            //InicializaTabla();
-            construirTablas();
+        if (comando == ATRAS) {
+            MenuDeOpciones mdo = new MenuDeOpciones();
+            mdo.setVisible(true);
+            dispose();
         }
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
                
 }  

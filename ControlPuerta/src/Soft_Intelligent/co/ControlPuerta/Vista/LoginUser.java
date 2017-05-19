@@ -25,7 +25,7 @@ public class LoginUser extends javax.swing.JFrame {
      */
     public LoginUser() {
         initComponents();
-        setLocation(350, 350);
+        setLocationRelativeTo(this);
         setResizable(false);
         setTitle("Iniciar Sesion");
     }
